@@ -1,11 +1,11 @@
-<!-- PHP START
+
 <?PHP
 //include("initer.php");
-session_start();
-if(!isset($_SESSION['usersess'])){ 
+//session_start();
+/*if(!isset($_SESSION['usersess'])){ 
 	header("Location: login.php");
-}
-else{
+}*/
+//else{
 //formhandling
 	if($_POST && isset($_POST['adduser'], $_POST['firstname'], $_POST['surname'], $_POST['usergroup'], $_POST['password'], $_POST['username'])){
 		$username = trim($_POST['username']);
@@ -28,32 +28,38 @@ else{
 		}
 	}
 	
-	if($_POST && isset($_POST['add-device'], $_POST['devicename']){
+	/*if($_POST && isset($_POST['add-device'], $_POST['devicename']){
 		//insert add device code here
 		
-	}
+	}*/
 	
 	//list users
 	function listUsers(){
 		$getUsercommand = "sudo smbldap-userlist | awk '{print $2}'";
 		$pythuserlist = shell_exec($getUsercommand." 2>&1");
 		/*echo "<script type='text/javascript'>alert('$pythadduser')</script>";*/
-		$userlistTrimmed=str_replace('|',"",$pythuserlist);
-		echo $userlistTrimmed;
+		$userlistTrimmed=str_replace('|'," ",$pythuserlist);
+		return $userlistTrimmed;
 	}
 	
 	function generateUserTable(){
 		$usernames = listUsers();
 		
-		$users = explode(" ", usernames);
+		$users = preg_split("/\s+/", $usernames);
 		$rownumber = 0;
 		foreach($users as $user){
+			if($rownumber++ < 4){
+				continue;
+			}
 			$user = trim($user);
 			$fullnameComm = "smbldap-usershow ".$user." | awk '/displayName: / {{print $2, $3}}'";
 			$fullName = trim(shell_exec($fullnameComm));
 			
+			if(empty($user)){
+				break;
+			}
 			//User group lookup
-			$gidcomm = "smbldap-usershow".$user." | awk '/gidNumber: / {{ print $2 }}'";
+			$gidcomm = "smbldap-usershow ".$user." | awk '/gidNumber: / {{ print $2 }}'";
 			$getgid = trim(shell_exec($gidcomm." 2>&1"));
 			//$getgid = trim($getgid);
 			
@@ -110,14 +116,11 @@ else{
 			$editusercommand=$editusercommand." ".$oldusername;
 			echo $editusercommand;
 	}
-	editUser("editmeXXX","10000","editme");
+	//editUser("editmeXXX","10000","editme");
 	//listusers();
-}
+//}
 ?>
 
-PHP END -->
-
-<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
   <head>
     <!-- Required meta tags always come first -->
@@ -152,18 +155,18 @@ PHP END -->
 		<div class="tab-content">
 			<div class="tab-pane" id="userlist" role="tabpanel">
 				<div class="container">
-					<!-- <?php //echo $getuseroutput ?> -->
 					<table class="table">
 						<thead class="thead-inverse">
 							<tr>
+								<th> </th>
 								<th>Username</th>
 								<th>First Name</th>
 								<th>Group</th>
-								<th>...</th>
+								<!--<th>...</th>-->
 							</tr>
 						</thead>
 						<tbody class="username-table">
-							<tr>
+							<!--<tr>
 								<th>gendo</th>
 								<td>Gendo Ikari</td>
 								<td>Domain Admins</td>
@@ -174,7 +177,8 @@ PHP END -->
 								<td>Amuro Ray</td>
 								<td>Students</td>
 								<td></td>
-							</tr>
+							</tr>-->
+							<?php generateUserTable() ?>
 						</tbody>
 					</table>
 					
@@ -193,7 +197,7 @@ PHP END -->
 									</button>
 									<h4 class="modal-title" id="myModalLabel1">Add New User</h4>
 								</div>
-								<form id='newuser' action='<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>' method='post' accept-charset='UTF-8'>
+								<form id='newuser' action='<?PHP //echo htmlspecialchars($_SERVER['PHP_SELF']); ?>' method='post' accept-charset='UTF-8'>
 									<div class="modal-body">
 									
 										<fieldset >
@@ -312,9 +316,9 @@ PHP END -->
 	
 	<!-- MODIFIED HERE -->
 	<script>
-		$(document).ready(function(){
+		/*$(document).ready(function(){
 		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
-		});
+		});*/
 	</script>
 	<!--MODIFIED TILL HERE-->
 
