@@ -41,6 +41,34 @@ else{
 		$userlistTrimmed=str_replace('|',"",$pythuserlist);
 		echo $userlistTrimmed;
 	}
+	
+	function generateUserTable(){
+		$usernames = listUsers();
+		
+		$users = explode(" ", usernames);
+		
+		foreach($users as $user){
+			$user = trim($user);
+			$fullnameComm = "smbldap-usershow ".$user." | awk '/displayName: / {{print $2, $3}}'";
+			$fullName = trim(shell_exec($fullnameComm));
+			
+			//User group lookup
+			$gidcomm = "smbldap-usershow".$user." | awk '/gidNumber: / {{ print $2 }}'";
+			$getgid = trim(shell_exec($gidcomm." 2>&1"));
+			//$getgid = trim($getgid);
+			
+			$gnamecomm = "sudo smbldap-grouplist | awk '/".$getgid."/ {{print $2,$3}}'";
+			$getgrpname = trim(shell_exec($gnamecomm." 2>&1"));
+			//$getgrpname = trim($getgrpname);
+			$userGroup = trim(str_replace('|',"",$getgrpname));
+			
+			echo '<tr>';
+			echo '<th>'.$user.'</th>';
+			echo '<th>'.$fullName.'</th>';
+			echo '<th>'.$userGroup.'</th>';
+			echo '</tr>';
+		}
+	}
 	//delete from smbldap	
 	//$userdel="deleteme";
 	//$deleteUsercommand = "sudo smbldap-userdel ".$userdel;
