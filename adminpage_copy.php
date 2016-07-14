@@ -26,55 +26,11 @@ else{
 			echo "<script type='text/javascript'>alert('$pythadduser')</script>";
 		}
 	}
-	//list users
-	function listUsers(){
-		$getUsercommand = "sudo smbldap-userlist | awk '{print $2}'";
-		$pythuserlist = shell_exec($getUsercommand." 2>&1");
-		/*echo "<script type='text/javascript'>alert('$pythadduser')</script>";*/
-		$userlistTrimmed=str_replace('|',"",$pythuserlist);
-		echo $userlistTrimmed;
-	}
-	//delete from smbldap	
-	//$userdel="deleteme";
-	//$deleteUsercommand = "sudo smbldap-userdel ".$userdel;
-	//$pythnewuserlist = shell_exec($deleteUsercommand." 2>&1");
-	//echo $pythnewuserlist;
-	function deleteUser($array){
-		//$array =array("del1","del2","del3");
-		foreach($array as $value){
-			$delUsercommand ="sudo smbldap-userdel ".$value;
-			$pythnewuserlist = shell_exec($delUsercommand." 2>&1");
-			echo "exeuted";	
-		}	
-	}
-	//$getUsercommand = "sudo smbldap-userlist | awk '{print $2}'";
-	//$pythuserlist = shell_exec($getUsercommand." 2>&1");
-	/*echo "<script type='text/javascript'>alert('$pythadduser')</script>";*/	
-	//$userlistTrimmed=str_replace('|',"",$pythuserlist);
-	
-	function convertGrStringtoGID($groupName){
-		$getGIDcommand="sudo smbldap-grouplist | awk '/".$groupName."/ {{print $1}}'";
-		$GID= shell_exec($getGIDcommand." 2>&1");
-		return $GID;
-
-	}
+	$getUsercommand = "sudo smbldap-userlist | awk '{print $2}'";
+	/*$pythadduser = shell_exec($getUsercommand." 2>&1");
+	echo "<script type='text/javascript'>alert('$pythadduser')</script>"*/
 
 
-	//groupname can be in array
-	function editUser($username, $groupname, $oldusername){
-			$editusercommand ="sudo smbldap-usermod ";
-			if(!empty($username)){
-				$editusercommand=$editusercommand."-r ".$username." ";
-			}
-			if(!empty($groupname)){
-				$gid=convertGrStringtoGID($groupname);
-				$editusercommand=$editusercommand."-g ".$gid;
-			}
-			$editusercommand=$editusercommand." ".$oldusername;
-			echo $editusercommand;
-	}
-	editUser("editmeXXX","10000","editme");
-	//listusers();
 }
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
