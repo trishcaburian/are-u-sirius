@@ -46,7 +46,7 @@ else{
 		$usernames = listUsers();
 		
 		$users = explode(" ", usernames);
-		
+		$rownumber = 0;
 		foreach($users as $user){
 			$user = trim($user);
 			$fullnameComm = "smbldap-usershow ".$user." | awk '/displayName: / {{print $2, $3}}'";
@@ -63,10 +63,12 @@ else{
 			$userGroup = trim(str_replace('|',"",$getgrpname));
 			
 			echo '<tr>';
+			echo "<td><input type='checkbox' name='checkbox[]' value='". $user . "' </td>";
 			echo '<th>'.$user.'</th>';
-			echo '<th>'.$fullName.'</th>';
-			echo '<th>'.$userGroup.'</th>';
+			echo '<td>'.$fullName.'</td>';
+			echo '<td>'.$userGroup.'</td>';
 			echo '</tr>';
+			
 		}
 	}
 	//delete from smbldap	
