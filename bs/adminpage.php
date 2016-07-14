@@ -14,11 +14,12 @@
 		$surname = trim($_POST['surname']);
 		$usergroup = trim($_POST['usergroup']);
 		
+		 echo "<script type='text/javascript'>alert('$usergroup')</script>";	
 		$pythcommand = "sudo /usr/bin/python /home/siriuser/pythons/add.py -n ".$firstname;
-		$pythcommand = $pythcommand." -s ".$surname." -g ".$usergroup." -p ".$password." ".$username;
+		$pythcommand = $pythcommand." -s ".$surname." -g \"".$usergroup."\" -p ".$password." ".$username;
         	$pythadduser = shell_exec($pythcommand." 2>&1");
 		$pythadduser = trim($pythadduser);
-
+		 echo "<script type='text/javascript'>alert('$pythcommand')</script>";
 		$addsuccess = "Changing UNIX and samba passwords for ".$username;
 		if($pythadduser == $addsuccess){
 			echo "<script type='text/javascript'>alert('Successfully added user ".$username."!')</script>";
@@ -197,7 +198,7 @@
 									</button>
 									<h4 class="modal-title" id="myModalLabel1">Add New User</h4>
 								</div>
-								<form id='newuser' action='<?PHP //echo htmlspecialchars($_SERVER['PHP_SELF']); ?>' method='post' accept-charset='UTF-8'>
+								<form id='newuser' action='' method='post' accept-charset='UTF-8'>
 									<div class="modal-body">
 									
 										<fieldset >
