@@ -1,0 +1,22 @@
+html,
+body {
+  height: 100%;
+  /* The html and body elements cannot have any padding or margin. */
+}
+.floating-action-button-custom {
+  position: absolute;
+ /*  top: 100px; */
+  /* margin-left: 50px; */
+  right: 9%;
+  bottom: 10%;
+  
+}
+ul.dropdown-menu {
+  box-shadow: none;
+  border: 0;
+  min-width:0;
+  background:transparent
+}
+#round_btn{
+	border-radius:50%;
+}

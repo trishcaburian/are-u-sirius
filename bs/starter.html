@@ -127,7 +127,11 @@ PHP END -->
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/sirius.min.css">
 	
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 	<!-- Validator -->
 	<script type='text/javascript' src='scripts/gen_validatorv31.js'></script>
   </head>
@@ -147,7 +151,19 @@ PHP END -->
 			<a class="nav-link" data-toggle="tab" href="#resources" role="tab">Resources</a>
 		  </li>
 		</ul>
-
+		
+		<!--floating action button-->
+					<div class="btn-group btn-group-lg dropup floating-action-button-custom" valign="bottom">
+					  <button type="button" class="btn btn-info btn-fab" id="round_btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><i class="material-icons">add</i>
+					  </button>
+					  <ul class="dropdown-menu dropdown-menu-right">
+						<li><a href="#" class="btn btn-danger btn-fab del_anchor" id="round_btn" data-toggle="tooltip" data-placement="top" title="Add User"><i class="material-icons">note_add</i></a></li>
+						<li><a href="#" class="btn btn-danger btn-fab del_anchor" id="round_btn" data-toggle="tooltip" data-placement="top" title="Edit User"><i class="material-icons">mode_edit</i></a></li> 
+						<li><a href="#" class="btn btn-danger btn-fab del_anchor" id="round_btn" data-toggle="tooltip" data-placement="top" title="Delete User"><i class="material-icons">clear</i></a></li>
+					  </ul>
+					</div>
+					
+					
 		<!-- Tab panes -->
 		<div class="tab-content">
 			<div class="tab-pane" id="userlist" role="tabpanel">
@@ -182,7 +198,9 @@ PHP END -->
 					<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#adduserModal">
 						Add new user
 					</button>
-
+					
+					
+					
 					<!-- Modal -->
 					<div class="modal fade" id="adduserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
 						<div class="modal-dialog" role="document">
@@ -305,17 +323,58 @@ PHP END -->
 				</div>
 			</div>
 		</div>
+		
+		
+		
+		<!-- <div>
+			Welcome to SIRIUS protection! :)  select a tab to begin <br> a project of names, pictures
+		</div> -->
 	</div> <!--container end-->
     <!-- jQuery first, then Bootstrap JS. -->
     <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+	<script src="https://www.atlasestateagents.co.uk/javascript/tether.min.js"></script><!-- Tether for Bootstrap --> 
     <script src="js/bootstrap.min.js"></script>
+	<script language="javascript" src="js/jquery.dimensions.js"></script>
+	
+	
 	
 	<!-- MODIFIED HERE -->
+	<script language="javascript">
+	var name = ".floating-action-button-custom";
+	var menuYloc = null;
+	
+		$(document).ready(function(){
+			menuYloc = parseInt($(name).css("top").substring(0,$(name).css("top").indexOf("px")))
+			$(window).scroll(function () { 
+				offset = menuYloc+$(document).scrollTop()+"px";
+				$(name).animate({top:offset},{duration:500,queue:false});
+			});
+		}); 
+	 </script>
+	
+	
 	<script>
 		$(document).ready(function(){
 		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
+		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
+		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
+		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
+		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
+		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
+		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
+		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
+		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
+		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
+		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
+		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
 		});
 	</script>
+	
+	 <script>
+	$(document).ready(function(){
+		$('[data-toggle="tooltip"]').tooltip();   
+	});
+	</script> 
 	<!--MODIFIED TILL HERE-->
 
 
