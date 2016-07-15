@@ -1,10 +1,10 @@
 
 <?PHP
 //include("initer.php");
-session_start();
+/*session_start();
 if(!isset($_SESSION['usersess'])){ 
 	header("Location: login.php");
-}
+}*/
 //else{
 //formhandling
 	if($_POST && isset($_POST['adduser'], $_POST['firstname'], $_POST['surname'], $_POST['usergroup'], $_POST['password'], $_POST['username'])){
@@ -14,13 +14,17 @@ if(!isset($_SESSION['usersess'])){
 		$surname = trim($_POST['surname']);
 		$usergroup = trim($_POST['usergroup']);
 		
-		 echo "<script type='text/javascript'>alert('$usergroup')</script>";	
+		 //echo "<script type='text/javascript'>alert('$usergroup')</script>";	
 		$pythcommand = "sudo /usr/bin/python /home/siriuser/pythons/add.py -n ".$firstname;
 		$pythcommand = $pythcommand." -s ".$surname." -g \"".$usergroup."\" -p ".$password." ".$username;
         	$pythadduser = shell_exec($pythcommand." 2>&1");
 		$pythadduser = trim($pythadduser);
-		 echo "<script type='text/javascript'>alert('$pythcommand')</script>";
+		 //echo "<script type='text/javascript'>alert('$pythcommand')</script>";
 		$addsuccess = "Changing UNIX and samba passwords for ".$username;
+
+		$smbenable = shell_exec("sudo smbpasswd -e ".$username." 2>&1");
+		$smbenable = trim($smbenable);
+		echo "<script type='text/javascript'>alert('$smbenable')</script>";
 		if($pythadduser == $addsuccess){
 			echo "<script type='text/javascript'>alert('Successfully added user ".$username."!')</script>";
 		}
@@ -156,7 +160,7 @@ if(!isset($_SESSION['usersess'])){
 		<div class="tab-content">
 			<div class="tab-pane" id="userlist" role="tabpanel">
 				<div class="container">
-					<table class="table">
+					<table class="table table-striped">
 						<thead class="thead-inverse">
 							<tr>
 								<th> </th>
