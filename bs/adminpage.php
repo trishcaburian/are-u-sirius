@@ -40,7 +40,7 @@ if(!isset($_SESSION['usersess'])){
 	
 	//list users
 	function listUsers(){
-		$getUsercommand = "sudo smbldap-userlist | awk '{print $2}'";
+		$getUsercommand = "sudo smbldap-userlist -u | awk '{print $2}'";
 		$pythuserlist = shell_exec($getUsercommand." 2>&1");
 		/*echo "<script type='text/javascript'>alert('$pythadduser')</script>";*/
 		$userlistTrimmed=str_replace('|'," ",$pythuserlist);
