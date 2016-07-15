@@ -144,7 +144,7 @@ if(!isset($_SESSION['usersess'])){
 	<div class="container">    
 		<h1>SIRIUS</h1>
 		<!-- Nav tabs -->
-		<ul class="nav nav-tabs" data-spy="affix" role="tablist">
+		<ul class="nav nav-tabs" role="tablist">
 		  <li class="nav-item">
 			<a class="nav-link" data-toggle="tab" href="#userlist" role="tab">User List</a>
 		  </li>
@@ -212,7 +212,7 @@ if(!isset($_SESSION['usersess'])){
 											
 											<div class="form-group">
 												<label for='username' >UserName*:</label>
-												<input type='text' class="form-control" name='username' id='username' maxlength="50" required/>
+												<input type='text' class="form-control" name='username' id='username' maxlength="50" autocomplete="off" required/>
 											</div>
 											<div class="form-group">
 												<label for='password' >Password*:</label>
@@ -220,15 +220,15 @@ if(!isset($_SESSION['usersess'])){
 											</div>
 											<div class="form-group">
 												<label for='firstname' >First Name*:</label>
-												<input type='text' class="form-control" name='firstname' id='firstname' maxlength="50" required/>
+												<input type='text' class="form-control" name='firstname' id='firstname' maxlength="50" autocomplete="off" required/>
 											</div>
 											<div class="form-group">
 												<label for='surname' >Surname*:</label>
-												<input type='text' class="form-control" name='surname' id='surname' maxlength="50" required/>
+												<input type='text' class="form-control" name='surname' id='surname' maxlength="50" autocomplete="off" required/>
 											</div>
 											<div class="form-group">
 												<label for='usergroup' >Group*:</label>
-												<input type='text' class="form-control" name='usergroup' id='firstname' maxlength="50" required/>
+												<input type='text' class="form-control" name='usergroup' id='firstname' maxlength="50" autocomplete="off" required/>
 											</div>
 										</fieldset>
 									
