@@ -1,10 +1,10 @@
 
 <?PHP
 //include("initer.php");
-//session_start();
-/*if(!isset($_SESSION['usersess'])){ 
+session_start();
+if(!isset($_SESSION['usersess'])){ 
 	header("Location: login.php");
-}*/
+}
 //else{
 //formhandling
 	if($_POST && isset($_POST['adduser'], $_POST['firstname'], $_POST['surname'], $_POST['usergroup'], $_POST['password'], $_POST['username'])){
@@ -197,7 +197,7 @@
 									</button>
 									<h4 class="modal-title" id="myModalLabel1">Add New User</h4>
 								</div>
-								<form id='newuser' action='<?PHP //echo htmlspecialchars($_SERVER['PHP_SELF']); ?>' method='post' accept-charset='UTF-8'>
+								<form id='newuser' action='<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>' method='post' accept-charset='UTF-8'>
 									<div class="modal-body">
 									
 										<fieldset >
