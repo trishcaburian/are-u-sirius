@@ -144,7 +144,7 @@ if(!isset($_SESSION['usersess'])){
 	<div class="container">    
 		<h1>SIRIUS</h1>
 		<!-- Nav tabs -->
-		<ul class="nav nav-tabs" role="tablist">
+		<ul class="nav nav-tabs" data-spy="affix" role="tablist">
 		  <li class="nav-item">
 			<a class="nav-link" data-toggle="tab" href="#userlist" role="tab">User List</a>
 		  </li>
