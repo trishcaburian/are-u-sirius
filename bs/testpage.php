@@ -363,7 +363,7 @@ PHP END -->
 			<div class="tab-pane" id="resources" role="tabpanel">
 				<div class="container hadoopIframe">
 					<!-- replace the src to hadoop's web interface. current src is for testing only -->
-					<iframe src="http://www.w3schools.com">iframes not supported?</iframe>
+					<iframe src="http://192.168.100.140:50070/dfshealth.html#tab-overview">iframes not supported?</iframe>
 				</div>
 			</div>
 		</div>
