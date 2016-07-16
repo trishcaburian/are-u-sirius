@@ -7,7 +7,7 @@
 }
 else{*/
 //formhandling
-	if($_POST && isset($_POST['adduser'], $_POST['firstname'], $_POST['surname'], $_POST['usergroup'], $_POST['password'], $_POST['username'])){
+	if($_POST && isset($_POST['newuser'], $_POST['adduser'], $_POST['firstname'], $_POST['surname'], $_POST['usergroup'], $_POST['password'], $_POST['username'])){
 		$username = trim($_POST['username']);
 		$password = trim($_POST['password']);
 		$firstname = trim($_POST['firstname']);
@@ -31,11 +31,14 @@ else{*/
 		}
 	}
 	
-	elseif($_POST && isset($_POST['add-device'], $_POST['devicename'])){
+	else if($_POST && isset($_POST['newdevice'], $_POST['add-device'], $_POST['devicename'])){
 		//insert add device code here
 		echo "<script type='text/javascript'>alert('this thing works')</script>";	
 	}
 	
+	function test(){
+		 print_r($_POST['checkbox']); 
+	}
 	//list users
 	//list users
 	function listUsers(){
@@ -256,7 +259,7 @@ PHP END -->
 									</button>
 									<h4 class="modal-title" id="myModalLabel1">Add New User</h4>
 								</div>
-								<form id='newuser' action='<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>' method='post' accept-charset='UTF-8'>
+								<form id='newuser' action='<?PHP test();//echo htmlspecialchars($_SERVER['PHP_SELF']); ?>' method='post' accept-charset='UTF-8'>
 									<div class="modal-body">
 									
 										<fieldset >
