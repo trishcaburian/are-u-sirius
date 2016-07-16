@@ -98,6 +98,9 @@ else{*/
 			if($rownumber++ < 2){
 				continue;
 			}
+			if(empty($machine)){
+				break;
+			}
 			echo '<tr>';
 			echo "<td><input type='checkbox' name='checkbox[]' value='". $machine . "'> </td>";
 			echo '<th>'.$machine.'</th>';
