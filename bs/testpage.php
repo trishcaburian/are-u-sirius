@@ -1,7 +1,7 @@
 <!-- PHP START
 <?PHP
 //include("initer.php");
-session_start();
+//session_start();
 /*if(!isset($_SESSION['usersess'])){ 
 	header("Location: login.php");
 }
@@ -31,10 +31,10 @@ else{*/
 		}
 	}
 	
-	if($_POST && isset($_POST['add-device'], $_POST['devicename']){
+	/*if($_POST && isset($_POST['add-device'], $_POST['devicename']){
 		//insert add device code here
 		
-	}
+	}*/
 	
 	//list users
 	//list users
@@ -302,15 +302,16 @@ PHP END -->
 								<tr>
 									<th> </th>
 									<th>Device Name</th>
-									<th>IP Address</th>
+									<!--<th>IP Address</th>-->
 								</tr>
 							</thead>
 							<tbody>
-								<td>
+								<!--<td>
 									<input type="checkbox" name="userchk">
 								</td>
 								<th>PC1</th>
-								<td>---------</td>
+								<td>---------</td>-->
+								<?php generateMachineTable() ?>
 							</tbody>
 						</table>
 					<!--</form>-->
