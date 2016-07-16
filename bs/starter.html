@@ -173,7 +173,7 @@ PHP END -->
 		</ul>
 		
 		<!--floating action button-->
-					<div class="btn-group btn-group-lg dropup floating-action-button-custom" valign="bottom">
+					<!-- <div class="btn-group btn-group-lg dropup floating-action-button-custom" valign="bottom">
 					  <button type="button" class="btn btn-info btn-fab" id="round_btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><i class="material-icons">add</i>
 					  </button>
 					  <ul class="dropdown-menu dropdown-menu-right">
@@ -181,89 +181,114 @@ PHP END -->
 						<li><a href="#" class="btn btn-danger btn-fab del_anchor" id="round_btn" data-toggle="tooltip" data-placement="top" title="Edit User"><i class="material-icons">mode_edit</i></a></li> 
 						<li><a href="#" class="btn btn-danger btn-fab del_anchor" id="round_btn" data-toggle="tooltip" data-placement="top" title="Delete User"><i class="material-icons">clear</i></a></li>
 					  </ul>
-					</div>
+					</div> -->
 					
 					
 		<!-- Tab panes -->
 		<div class="tab-content">
-			<div class="tab-pane" id="userlist" role="tabpanel">
-				<div class="container">
-					<!-- <?php //echo $getuseroutput ?> -->
-					<table class="table">
-						<thead class="thead-inverse">
-							<tr>
-								<th>Username</th>
-								<th>First Name</th>
-								<th>Group</th>
-								<th>...</th>
-							</tr>
-						</thead>
-						<tbody class="username-table">
-							<?php generateUserTable() ?>
-						</tbody>
-					</table>
-					
-					<!-- Button trigger modal -->
-					<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#adduserModal">
-						Add new user
-					</button>
-					
-					
-					
-					<!-- Modal -->
-					<div class="modal fade" id="adduserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
-						<div class="modal-dialog" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-										<span aria-hidden="true">×</span>
-									</button>
-									<h4 class="modal-title" id="myModalLabel1">Add New User</h4>
+				<div class="tab-pane" id="userlist" role="tabpanel">
+				
+				<!--floating action button-->
+						 <div class="btn-group btn-group-lg dropup floating-action-button-custom" id="floatingbutton" valign="bottom">
+						  <button type="button" class="btn btn-info btn-fab" id="round_btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><i class="material-icons">add</i>
+						  </button>
+						  <ul class="dropdown-menu dropdown-menu-right">
+							<li data-toggle="modal" data-target="#adduserModal"><a href="#" class="btn btn-danger btn-fab del_anchor" id="round_btn" data-toggle="tooltip" data-placement="top" title="Add User" ><i class="material-icons">note_add</i></a></li>
+							<li><a href="#" class="btn btn-danger btn-fab del_anchor" id="round_btn" data-toggle="tooltip" data-placement="top" title="Edit User"><i class="material-icons">mode_edit</i></a></li> 
+							<li><a href="#" class="btn btn-danger btn-fab del_anchor" id="round_btn" data-toggle="tooltip" data-placement="top" title="Delete User"><i class="material-icons">clear</i></a></li>
+						  </ul>
+						</div>  
+						
+					<div class="container">
+						<!-- <?php //echo $getuseroutput ?> -->
+						<table class="table">
+							<thead class="thead-inverse">
+								<tr>
+									<th>Username</th>
+									<th>First Name</th>
+									<th>Group</th>
+									<th>...</th>
+								</tr>
+							</thead>
+							<tbody class="username-table">
+								<?php generateUserTable() ?>
+							</tbody>
+						</table>
+						
+						<!-- Button trigger modal -->
+						<!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#adduserModal">
+							Add new user
+						</button> -->
+						
+						
+						
+						<!-- Modal -->
+						<div class="modal fade" id="adduserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">×</span>
+										</button>
+										<h4 class="modal-title" id="myModalLabel1">Add New User</h4>
+									</div>
+									<form id='newuser' action='<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>' method='post' accept-charset='UTF-8'>
+										<div class="modal-body">
+										
+											<fieldset >
+												<!--<legend>Add New User</legend-->
+												<!--<input type='hidden' class="form-control" name='submitted' id='submitted' value='1'/>-->
+												
+												<div class="form-group">
+													<label for='username' >UserName*:</label>
+													<input type='text' class="form-control" name='username' id='username' maxlength="50" required/>
+												</div>
+												<div class="form-group">
+													<label for='password' >Password*:</label>
+													<input type='password' class="form-control" name='password' id='password' maxlength="50" required/>
+												</div>
+												<div class="form-group">
+													<label for='firstname' >First Name*:</label>
+													<input type='text' class="form-control" name='firstname' id='firstname' maxlength="50" required/>
+												</div>
+												<div class="form-group">
+													<label for='surname' >Surname*:</label>
+													<input type='text' class="form-control" name='surname' id='surname' maxlength="50" required/>
+												</div>
+												<div class="form-group">
+													<label for='usergroup' >Group*:</label>
+													<input type='text' class="form-control" name='usergroup' id='firstname' maxlength="50" required/>
+												</div>
+											</fieldset>
+										
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+											<!-- if nextuser, open clean modal. possibly php-handled -->
+											<input type='submit' class="btn btn-info" name='nextuser' value='Submit and Add another user' />
+											<input type='submit' class="btn btn-primary" name='adduser' value='Submit' />
+										</div>
+									</form>
 								</div>
-								<form id='newuser' action='<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>' method='post' accept-charset='UTF-8'>
-									<div class="modal-body">
-									
-										<fieldset >
-											<!--<legend>Add New User</legend-->
-											<!--<input type='hidden' class="form-control" name='submitted' id='submitted' value='1'/>-->
-											
-											<div class="form-group">
-												<label for='username' >UserName*:</label>
-												<input type='text' class="form-control" name='username' id='username' maxlength="50" required/>
-											</div>
-											<div class="form-group">
-												<label for='password' >Password*:</label>
-												<input type='password' class="form-control" name='password' id='password' maxlength="50" required/>
-											</div>
-											<div class="form-group">
-												<label for='firstname' >First Name*:</label>
-												<input type='text' class="form-control" name='firstname' id='firstname' maxlength="50" required/>
-											</div>
-											<div class="form-group">
-												<label for='surname' >Surname*:</label>
-												<input type='text' class="form-control" name='surname' id='surname' maxlength="50" required/>
-											</div>
-											<div class="form-group">
-												<label for='usergroup' >Group*:</label>
-												<input type='text' class="form-control" name='usergroup' id='firstname' maxlength="50" required/>
-											</div>
-										</fieldset>
-									
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-										<!-- if nextuser, open clean modal. possibly php-handled -->
-										<input type='submit' class="btn btn-info" name='nextuser' value='Submit and Add another user' />
-										<input type='submit' class="btn btn-primary" name='adduser' value='Submit' />
-									</div>
-								</form>
 							</div>
 						</div>
+						<!-- END -->
 					</div>
-					<!-- END -->
-				</div>
-			</div>
+				 </div> 
+			<!-- </div> -->
 			<div class="tab-pane" id="deviceadd" role="tabpanel">
+				
+				<!--floating action button-->
+						 <div class="btn-group btn-group-lg dropup floating-action-button-custom" id="floatingbutton" valign="bottom">
+						  <button type="button" class="btn btn-info btn-fab" id="round_btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><i class="material-icons">add</i>
+						  </button>
+						  <ul class="dropdown-menu dropdown-menu-right">
+							<li><a href="#" class="btn btn-danger btn-fab del_anchor" id="round_btn" data-toggle="tooltip" data-placement="top" title="Add Machine"><i class="material-icons">note_add</i></a></li>
+							<li><a href="#" class="btn btn-danger btn-fab del_anchor" id="round_btn" data-toggle="tooltip" data-placement="top" title="Edit Machine"><i class="material-icons">mode_edit</i></a></li> 
+							<li><a href="#" class="btn btn-danger btn-fab del_anchor" id="round_btn" data-toggle="tooltip" data-placement="top" title="Delete Machine"><i class="material-icons">clear</i></a></li>
+						  </ul>
+						</div> 
+				
 				<div class="container">
 
 
@@ -327,10 +352,20 @@ PHP END -->
 				</div>
 			</div>
 			<div class="tab-pane" id="resources" role="tabpanel">
+
 				<div class="container hadoopIframe">
 					<!-- replace the src to hadoop's web interface. current src is for testing only -->
 					<iframe src="http://www.w3schools.com">iframes not supported?</iframe>
 				</div>
+				<!--floating action button-->
+						 <div class="btn-group btn-group-lg dropup floating-action-button-custom" id="floatingbutton" valign="bottom">
+						  <button type="button" class="btn btn-info btn-fab" id="round_btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><i class="material-icons">add</i>
+						  </button>
+						  <ul class="dropdown-menu dropdown-menu-right">
+							<li><a href="#" class="btn btn-danger btn-fab del_anchor" id="round_btn" data-toggle="tooltip" data-placement="top" title="Change Permissions"><i class="material-icons">mode_edit</i></a></li> 
+
+						  </ul>
+						</div> 
 			</div>
 		</div>
 		
@@ -350,17 +385,61 @@ PHP END -->
 	
 	<!-- MODIFIED HERE -->
 	<script language="javascript">
-	var name = ".floating-action-button-custom";
-	var menuYloc = null;
 	
-		$(document).ready(function(){
+	var checkExist = setInterval(function() {
+	   if ($('.floating-action-button-custom').length) {
+		  console.log("Exists!");
+		  var name = ".floating-action-button-custom";
+		var menuYloc = null;
+		console.log ("executed");
+			pos=$(name).position();
+			temp=$(name).css("top", pos.top + "px");
+			console.log($(name).position());
 			menuYloc = parseInt($(name).css("top").substring(0,$(name).css("top").indexOf("px")))
+			console.log(menuYloc);
 			$(window).scroll(function () { 
 				offset = menuYloc+$(document).scrollTop()+"px";
 				$(name).animate({top:offset},{duration:500,queue:false});
 			});
-		}); 
+		  clearInterval(checkExist);
+	   }
+	}, 100);
+	
+	//waitUntilExists(".floating-action-button-custom",function(){
+	//	var name = ".floating-action-button-custom";
+	//	var menuYloc = null;
+	//	console.log ("executed");
+	//		pos=$(name).position();
+	//		temp=$(name).css("top", pos.top + "px");
+	//		console.log($(name).position());
+	//		menuYloc = parseInt($(name).css("top").substring(0,$(name).css("top").indexOf("px")))
+	//		console.log(menuYloc);
+	//		$(window).scroll(function () { 
+	//			offset = menuYloc+$(document).scrollTop()+"px";
+	//			$(name).animate({top:offset},{duration:500,queue:false});
+	//		});
+	//})
+	
+	
 	 </script>
+	 
+	 <script>
+		$(document).ready(function(){
+		
+		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
+		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
+		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
+		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
+		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
+		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
+		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
+		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
+		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
+		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
+		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
+		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
+		});
+	</script>
 	
 	 <script>
 	$(document).ready(function(){
