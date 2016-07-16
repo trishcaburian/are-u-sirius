@@ -138,6 +138,26 @@ if(!isset($_SESSION['usersess'])){
 	
 	<!-- Validator -->
 	<script type='text/javascript' src='scripts/gen_validatorv31.js'></script>
+	
+	<!-- some iframe css code -->
+	<style>
+		.hadoopIframe {
+			position: relative;
+			padding-bottom: 65.25%;
+			padding-top: 30px;
+			height: 0;
+			overflow: auto; 
+			-webkit-overflow-scrolling:touch; //<<--- THIS IS THE KEY 
+			border: solid black 1px;
+		} 
+		.hadoopIframe iframe {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+		}
+	</style>
   </head>
   <body>
 
@@ -311,7 +331,8 @@ if(!isset($_SESSION['usersess'])){
 			</div>
 			<div class="tab-pane" id="resources" role="tabpanel">
 				<div class="container">
-					
+					<!-- replace the src to hadoop's web interface. current src is for testing only -->
+					<iframe src="http://www.w3schools.com">iframes not supported?</iframe>
 				</div>
 			</div>
 		</div>
