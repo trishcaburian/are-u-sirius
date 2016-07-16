@@ -41,6 +41,36 @@ else{
 		$userlistTrimmed=str_replace('|',"",$pythuserlist);
 		echo $userlistTrimmed;
 	}
+	
+	function generateUserTable(){
+		$usernames = listUsers();
+		
+		$users = explode(" ", usernames);
+		$rownumber = 0;
+		foreach($users as $user){
+			$user = trim($user);
+			$fullnameComm = "smbldap-usershow ".$user." | awk '/displayName: / {{print $2, $3}}'";
+			$fullName = trim(shell_exec($fullnameComm));
+			
+			//User group lookup
+			$gidcomm = "smbldap-usershow".$user." | awk '/gidNumber: / {{ print $2 }}'";
+			$getgid = trim(shell_exec($gidcomm." 2>&1"));
+			//$getgid = trim($getgid);
+			
+			$gnamecomm = "sudo smbldap-grouplist | awk '/".$getgid."/ {{print $2,$3}}'";
+			$getgrpname = trim(shell_exec($gnamecomm." 2>&1"));
+			//$getgrpname = trim($getgrpname);
+			$userGroup = trim(str_replace('|',"",$getgrpname));
+			
+			echo '<tr>';
+			echo "<td><input type='checkbox' name='checkbox[]' value='". $user . "'> </td>";
+			echo '<th>'.$user.'</th>';
+			echo '<td>'.$fullName.'</td>';
+			echo '<td>'.$userGroup.'</td>';
+			echo '</tr>';
+			
+		}
+	}
 	//delete from smbldap	
 	//$userdel="deleteme";
 	//$deleteUsercommand = "sudo smbldap-userdel ".$userdel;
@@ -97,9 +127,33 @@ PHP END -->
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/sirius.min.css">
 	
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 	<!-- Validator -->
 	<script type='text/javascript' src='scripts/gen_validatorv31.js'></script>
+	
+	<!-- some iframe css code -->
+	<style>
+		.hadoopIframe {
+			position: relative;
+			padding-bottom: 65.25%;
+			padding-top: 30px;
+			height: 0;
+			overflow: auto; 
+			-webkit-overflow-scrolling:touch; //<<--- THIS IS THE KEY 
+			border: solid black 1px;
+		} 
+		.hadoopIframe iframe {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+		}
+	</style>
   </head>
   <body>
 
@@ -117,7 +171,19 @@ PHP END -->
 			<a class="nav-link" data-toggle="tab" href="#resources" role="tab">Resources</a>
 		  </li>
 		</ul>
-
+		
+		<!--floating action button-->
+					<div class="btn-group btn-group-lg dropup floating-action-button-custom" valign="bottom">
+					  <button type="button" class="btn btn-info btn-fab" id="round_btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><i class="material-icons">add</i>
+					  </button>
+					  <ul class="dropdown-menu dropdown-menu-right">
+						<li><a href="#" class="btn btn-danger btn-fab del_anchor" id="round_btn" data-toggle="tooltip" data-placement="top" title="Add User"><i class="material-icons">note_add</i></a></li>
+						<li><a href="#" class="btn btn-danger btn-fab del_anchor" id="round_btn" data-toggle="tooltip" data-placement="top" title="Edit User"><i class="material-icons">mode_edit</i></a></li> 
+						<li><a href="#" class="btn btn-danger btn-fab del_anchor" id="round_btn" data-toggle="tooltip" data-placement="top" title="Delete User"><i class="material-icons">clear</i></a></li>
+					  </ul>
+					</div>
+					
+					
 		<!-- Tab panes -->
 		<div class="tab-content">
 			<div class="tab-pane" id="userlist" role="tabpanel">
@@ -133,18 +199,7 @@ PHP END -->
 							</tr>
 						</thead>
 						<tbody class="username-table">
-							<tr>
-								<th>gendo</th>
-								<td>Gendo Ikari</td>
-								<td>Domain Admins</td>
-								<td></td>
-							</tr>
-							<tr>
-								<th>amuro</th>
-								<td>Amuro Ray</td>
-								<td>Students</td>
-								<td></td>
-							</tr>
+							<?php generateUserTable() ?>
 						</tbody>
 					</table>
 					
@@ -152,7 +207,9 @@ PHP END -->
 					<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#adduserModal">
 						Add new user
 					</button>
-
+					
+					
+					
 					<!-- Modal -->
 					<div class="modal fade" id="adduserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
 						<div class="modal-dialog" role="document">
@@ -270,22 +327,46 @@ PHP END -->
 				</div>
 			</div>
 			<div class="tab-pane" id="resources" role="tabpanel">
-				<div class="container">
-					
+				<div class="container hadoopIframe">
+					<!-- replace the src to hadoop's web interface. current src is for testing only -->
+					<iframe src="http://www.w3schools.com">iframes not supported?</iframe>
 				</div>
 			</div>
 		</div>
+		
+		
+		
+		<!-- <div>
+			Welcome to SIRIUS protection! :)  select a tab to begin <br> a project of names, pictures
+		</div> -->
 	</div> <!--container end-->
     <!-- jQuery first, then Bootstrap JS. -->
     <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+	<script src="https://www.atlasestateagents.co.uk/javascript/tether.min.js"></script><!-- Tether for Bootstrap --> 
     <script src="js/bootstrap.min.js"></script>
+	<script language="javascript" src="js/jquery.dimensions.js"></script>
+	
+	
 	
 	<!-- MODIFIED HERE -->
-	<script>
+	<script language="javascript">
+	var name = ".floating-action-button-custom";
+	var menuYloc = null;
+	
 		$(document).ready(function(){
-		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
-		});
-	</script>
+			menuYloc = parseInt($(name).css("top").substring(0,$(name).css("top").indexOf("px")))
+			$(window).scroll(function () { 
+				offset = menuYloc+$(document).scrollTop()+"px";
+				$(name).animate({top:offset},{duration:500,queue:false});
+			});
+		}); 
+	 </script>
+	
+	 <script>
+	$(document).ready(function(){
+		$('[data-toggle="tooltip"]').tooltip();   
+	});
+	</script> 
 	<!--MODIFIED TILL HERE-->
 
 
