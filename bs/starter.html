@@ -16,9 +16,12 @@ else{
 		
 		$pythcommand = "sudo /usr/bin/python /home/siriuser/pythons/add.py -n ".$firstname;
 		$pythcommand = $pythcommand." -s ".$surname." -g ".$usergroup." -p ".$password." ".$username;
-        	$pythadduser = shell_exec($pythcommand." 2>&1");
+        $pythadduser = shell_exec($pythcommand." 2>&1");
 		$pythadduser = trim($pythadduser);
 
+		$smbenable = shell_exec("sudo smbpasswd -e ".$username." 2>&1");
+		$smbenable = trim($smbenable);
+		echo "<script type='text/javascript'>alert('$smbenable')</script>";
 		$addsuccess = "Changing UNIX and samba passwords for ".$username;
 		if($pythadduser == $addsuccess){
 			echo "<script type='text/javascript'>alert('Successfully added user ".$username."!')</script>";
@@ -34,26 +37,33 @@ else{
 	}
 	
 	//list users
+	//list users
 	function listUsers(){
-		$getUsercommand = "sudo smbldap-userlist | awk '{print $2}'";
+		$getUsercommand = "sudo smbldap-userlist -u | awk '{print $2}'";
 		$pythuserlist = shell_exec($getUsercommand." 2>&1");
 		/*echo "<script type='text/javascript'>alert('$pythadduser')</script>";*/
-		$userlistTrimmed=str_replace('|',"",$pythuserlist);
-		echo $userlistTrimmed;
+		$userlistTrimmed=str_replace('|'," ",$pythuserlist);
+		return $userlistTrimmed;
 	}
 	
 	function generateUserTable(){
 		$usernames = listUsers();
 		
-		$users = explode(" ", usernames);
+		$users = preg_split("/\s+/", $usernames);
 		$rownumber = 0;
 		foreach($users as $user){
+			if($rownumber++ < 4){
+				continue;
+			}
 			$user = trim($user);
 			$fullnameComm = "smbldap-usershow ".$user." | awk '/displayName: / {{print $2, $3}}'";
 			$fullName = trim(shell_exec($fullnameComm));
 			
+			if(empty($user)){
+				break;
+			}
 			//User group lookup
-			$gidcomm = "smbldap-usershow".$user." | awk '/gidNumber: / {{ print $2 }}'";
+			$gidcomm = "smbldap-usershow ".$user." | awk '/gidNumber: / {{ print $2 }}'";
 			$getgid = trim(shell_exec($gidcomm." 2>&1"));
 			//$getgid = trim($getgid);
 			
