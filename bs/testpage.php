@@ -93,7 +93,11 @@ else{*/
 		$maclist = listMachines();
 		
 		$machines = preg_split("/\s+/", $maclist);
+		$rownumber = 0;
 		foreach($machines as $machine){
+			if($rownumber++ < 2){
+				continue;
+			}
 			echo '<tr>';
 			echo "<td><input type='checkbox' name='checkbox[]' value='". $machine . "'> </td>";
 			echo '<th>'.$machine.'</th>';
