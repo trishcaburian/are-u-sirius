@@ -81,6 +81,25 @@ else{*/
 			
 		}
 	}
+	
+	function listMachines(){
+		$getUsercommand = "sudo smbldap-userlist -m | awk '{print $2}'";
+		$pythuserlist = shell_exec($getUsercommand." 2>&1");
+		$maclistTrimmed=str_replace('|'," ",$pythuserlist);
+		return $maclistTrimmed;
+	}
+	
+	function generateMachineTable(){
+		$maclist = listMachines();
+		
+		$machines = preg_split("/\s+/", $maclist);
+		foreach($machines as $machine){
+			echo '<tr>';
+			echo "<td><input type='checkbox' name='checkbox[]' value='". $machine . "'> </td>";
+			echo '<th>'.$machine.'</th>';
+			echo '</tr>';
+		}
+	}
 	//delete from smbldap	
 	//$userdel="deleteme";
 	//$deleteUsercommand = "sudo smbldap-userdel ".$userdel;
