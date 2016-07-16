@@ -134,6 +134,26 @@ PHP END -->
 
 	<!-- Validator -->
 	<script type='text/javascript' src='scripts/gen_validatorv31.js'></script>
+	
+	<!-- some iframe css code -->
+	<style>
+		.hadoopIframe {
+			position: relative;
+			padding-bottom: 65.25%;
+			padding-top: 30px;
+			height: 0;
+			overflow: auto; 
+			-webkit-overflow-scrolling:touch; //<<--- THIS IS THE KEY 
+			border: solid black 1px;
+		} 
+		.hadoopIframe iframe {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+		}
+	</style>
   </head>
   <body>
 
@@ -179,18 +199,7 @@ PHP END -->
 							</tr>
 						</thead>
 						<tbody class="username-table">
-							<tr>
-								<th>gendo</th>
-								<td>Gendo Ikari</td>
-								<td>Domain Admins</td>
-								<td></td>
-							</tr>
-							<tr>
-								<th>amuro</th>
-								<td>Amuro Ray</td>
-								<td>Students</td>
-								<td></td>
-							</tr>
+							<?php generateUserTable() ?>
 						</tbody>
 					</table>
 					
@@ -318,8 +327,9 @@ PHP END -->
 				</div>
 			</div>
 			<div class="tab-pane" id="resources" role="tabpanel">
-				<div class="container">
-					
+				<div class="container hadoopIframe">
+					<!-- replace the src to hadoop's web interface. current src is for testing only -->
+					<iframe src="http://www.w3schools.com">iframes not supported?</iframe>
 				</div>
 			</div>
 		</div>
@@ -351,24 +361,6 @@ PHP END -->
 			});
 		}); 
 	 </script>
-	
-	
-	<script>
-		$(document).ready(function(){
-		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
-		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
-		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
-		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
-		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
-		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
-		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
-		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
-		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
-		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
-		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
-		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
-		});
-	</script>
 	
 	 <script>
 	$(document).ready(function(){
