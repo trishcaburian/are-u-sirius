@@ -31,10 +31,10 @@ else{*/
 		}
 	}
 	
-	/*if($_POST && isset($_POST['add-device'], $_POST['devicename']){
+	elseif($_POST && isset($_POST['add-device'], $_POST['devicename'])){
 		//insert add device code here
-		
-	}*/
+		echo "<script type='text/javascript'>alert('this thing works')</script>";	
+	}
 	
 	//list users
 	//list users
