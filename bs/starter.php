@@ -1,11 +1,11 @@
 <!-- PHP START
 <?PHP
 //include("initer.php");
-//session_start();
-/*if(!isset($_SESSION['usersess'])){ 
+session_start();
+if(!isset($_SESSION['usersess'])){ 
 	header("Location: login.php");
 }
-else{*/
+else{
 //formhandling
 	if($_POST && isset($_POST['adduser'], $_POST['firstname'], $_POST['surname'], $_POST['usergroup'], $_POST['password'], $_POST['username'])){
 		$username = trim($_POST['username']);
@@ -16,12 +16,9 @@ else{*/
 		
 		$pythcommand = "sudo /usr/bin/python /home/siriuser/pythons/add.py -n ".$firstname;
 		$pythcommand = $pythcommand." -s ".$surname." -g ".$usergroup." -p ".$password." ".$username;
-        $pythadduser = shell_exec($pythcommand." 2>&1");
+        	$pythadduser = shell_exec($pythcommand." 2>&1");
 		$pythadduser = trim($pythadduser);
 
-		$smbenable = shell_exec("sudo smbpasswd -e ".$username." 2>&1");
-		$smbenable = trim($smbenable);
-		echo "<script type='text/javascript'>alert('$smbenable')</script>";
 		$addsuccess = "Changing UNIX and samba passwords for ".$username;
 		if($pythadduser == $addsuccess){
 			echo "<script type='text/javascript'>alert('Successfully added user ".$username."!')</script>";
@@ -31,74 +28,18 @@ else{*/
 		}
 	}
 	
-	/*if($_POST && isset($_POST['add-device'], $_POST['devicename']){
+	if($_POST && isset($_POST['add-device'], $_POST['devicename']){
 		//insert add device code here
 		
-	}*/
+	}
 	
-	//list users
 	//list users
 	function listUsers(){
-		$getUsercommand = "sudo smbldap-userlist -u | awk '{print $2}'";
+		$getUsercommand = "sudo smbldap-userlist | awk '{print $2}'";
 		$pythuserlist = shell_exec($getUsercommand." 2>&1");
 		/*echo "<script type='text/javascript'>alert('$pythadduser')</script>";*/
-		$userlistTrimmed=str_replace('|'," ",$pythuserlist);
-		return $userlistTrimmed;
-	}
-	
-	function generateUserTable(){
-		$usernames = listUsers();
-		
-		$users = preg_split("/\s+/", $usernames);
-		$rownumber = 0;
-		foreach($users as $user){
-			if($rownumber++ < 4){
-				continue;
-			}
-			$user = trim($user);
-			$fullnameComm = "smbldap-usershow ".$user." | awk '/displayName: / {{print $2, $3}}'";
-			$fullName = trim(shell_exec($fullnameComm));
-			
-			if(empty($user)){
-				break;
-			}
-			//User group lookup
-			$gidcomm = "smbldap-usershow ".$user." | awk '/gidNumber: / {{ print $2 }}'";
-			$getgid = trim(shell_exec($gidcomm." 2>&1"));
-			//$getgid = trim($getgid);
-			
-			$gnamecomm = "sudo smbldap-grouplist | awk '/".$getgid."/ {{print $2,$3}}'";
-			$getgrpname = trim(shell_exec($gnamecomm." 2>&1"));
-			//$getgrpname = trim($getgrpname);
-			$userGroup = trim(str_replace('|',"",$getgrpname));
-			
-			echo '<tr>';
-			echo "<td><input type='checkbox' name='checkbox[]' value='". $user . "'> </td>";
-			echo '<th>'.$user.'</th>';
-			echo '<td>'.$fullName.'</td>';
-			echo '<td>'.$userGroup.'</td>';
-			echo '</tr>';
-			
-		}
-	}
-	
-	function listMachines(){
-		$getUsercommand = "sudo smbldap-userlist -m | awk '{print $2}'";
-		$pythuserlist = shell_exec($getUsercommand." 2>&1");
-		$maclistTrimmed=str_replace('|'," ",$pythuserlist);
-		return $maclistTrimmed;
-	}
-	
-	function generateMachineTable(){
-		$maclist = listMachines();
-		
-		$machines = preg_split("/\s+/", $maclist);
-		foreach($machines as $machine){
-			echo '<tr>';
-			echo "<td><input type='checkbox' name='checkbox[]' value='". $machine . "'> </td>";
-			echo '<th>'.$machine.'</th>';
-			echo '</tr>';
-		}
+		$userlistTrimmed=str_replace('|',"",$pythuserlist);
+		echo $userlistTrimmed;
 	}
 	//delete from smbldap	
 	//$userdel="deleteme";
@@ -141,7 +82,7 @@ else{*/
 	}
 	editUser("editmeXXX","10000","editme");
 	//listusers();
-//}
+}
 ?>
 
 PHP END -->
@@ -156,33 +97,9 @@ PHP END -->
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/sirius.min.css">
 	
-	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
 	<!-- Validator -->
 	<script type='text/javascript' src='scripts/gen_validatorv31.js'></script>
-	
-	<!-- some iframe css code -->
-	<style>
-		.hadoopIframe {
-			position: relative;
-			padding-bottom: 65.25%;
-			padding-top: 30px;
-			height: 0;
-			overflow: auto; 
-			-webkit-overflow-scrolling:touch; //<<--- THIS IS THE KEY 
-			border: solid black 1px;
-		} 
-		.hadoopIframe iframe {
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-		}
-	</style>
   </head>
   <body>
 
@@ -200,19 +117,7 @@ PHP END -->
 			<a class="nav-link" data-toggle="tab" href="#resources" role="tab">Resources</a>
 		  </li>
 		</ul>
-		
-		<!--floating action button-->
-					<div class="btn-group btn-group-lg dropup floating-action-button-custom" valign="bottom">
-					  <button type="button" class="btn btn-info btn-fab" id="round_btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><i class="material-icons">add</i>
-					  </button>
-					  <ul class="dropdown-menu dropdown-menu-right">
-						<li><a href="#" class="btn btn-danger btn-fab del_anchor" id="round_btn" data-toggle="tooltip" data-placement="top" title="Add User"><i class="material-icons">note_add</i></a></li>
-						<li><a href="#" class="btn btn-danger btn-fab del_anchor" id="round_btn" data-toggle="tooltip" data-placement="top" title="Edit User"><i class="material-icons">mode_edit</i></a></li> 
-						<li><a href="#" class="btn btn-danger btn-fab del_anchor" id="round_btn" data-toggle="tooltip" data-placement="top" title="Delete User"><i class="material-icons">clear</i></a></li>
-					  </ul>
-					</div>
-					
-					
+
 		<!-- Tab panes -->
 		<div class="tab-content">
 			<div class="tab-pane" id="userlist" role="tabpanel">
@@ -228,7 +133,18 @@ PHP END -->
 							</tr>
 						</thead>
 						<tbody class="username-table">
-							<?php generateUserTable() ?>
+							<tr>
+								<th>gendo</th>
+								<td>Gendo Ikari</td>
+								<td>Domain Admins</td>
+								<td></td>
+							</tr>
+							<tr>
+								<th>amuro</th>
+								<td>Amuro Ray</td>
+								<td>Students</td>
+								<td></td>
+							</tr>
 						</tbody>
 					</table>
 					
@@ -236,9 +152,7 @@ PHP END -->
 					<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#adduserModal">
 						Add new user
 					</button>
-					
-					
-					
+
 					<!-- Modal -->
 					<div class="modal fade" id="adduserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
 						<div class="modal-dialog" role="document">
@@ -302,16 +216,15 @@ PHP END -->
 								<tr>
 									<th> </th>
 									<th>Device Name</th>
-									<!--<th>IP Address</th>-->
+									<th>IP Address</th>
 								</tr>
 							</thead>
 							<tbody>
-								<!--<td>
+								<td>
 									<input type="checkbox" name="userchk">
 								</td>
 								<th>PC1</th>
-								<td>---------</td>-->
-								<?php generateMachineTable() ?>
+								<td>---------</td>
 							</tbody>
 						</table>
 					<!--</form>-->
@@ -357,46 +270,22 @@ PHP END -->
 				</div>
 			</div>
 			<div class="tab-pane" id="resources" role="tabpanel">
-				<div class="container hadoopIframe">
-					<!-- replace the src to hadoop's web interface. current src is for testing only -->
-					<iframe src="http://www.w3schools.com">iframes not supported?</iframe>
+				<div class="container">
+					
 				</div>
 			</div>
 		</div>
-		
-		
-		
-		<!-- <div>
-			Welcome to SIRIUS protection! :)  select a tab to begin <br> a project of names, pictures
-		</div> -->
 	</div> <!--container end-->
     <!-- jQuery first, then Bootstrap JS. -->
     <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
-	<script src="https://www.atlasestateagents.co.uk/javascript/tether.min.js"></script><!-- Tether for Bootstrap --> 
     <script src="js/bootstrap.min.js"></script>
-	<script language="javascript" src="js/jquery.dimensions.js"></script>
-	
-	
 	
 	<!-- MODIFIED HERE -->
-	<script language="javascript">
-	var name = ".floating-action-button-custom";
-	var menuYloc = null;
-	
+	<script>
 		$(document).ready(function(){
-			menuYloc = parseInt($(name).css("top").substring(0,$(name).css("top").indexOf("px")))
-			$(window).scroll(function () { 
-				offset = menuYloc+$(document).scrollTop()+"px";
-				$(name).animate({top:offset},{duration:500,queue:false});
-			});
-		}); 
-	 </script>
-	
-	 <script>
-	$(document).ready(function(){
-		$('[data-toggle="tooltip"]').tooltip();   
-	});
-	</script> 
+		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
+		});
+	</script>
 	<!--MODIFIED TILL HERE-->
 
 
