@@ -1,11 +1,11 @@
 <!-- PHP START
 <?PHP
 //include("initer.php");
-session_start();
+/*session_start();
 if(!isset($_SESSION['usersess'])){ 
 	header("Location: login.php");
 }
-else{
+else{*/
 //formhandling
 	if($_POST && isset($_POST['adduser'], $_POST['firstname'], $_POST['surname'], $_POST['usergroup'], $_POST['password'], $_POST['username'])){
 		$username = trim($_POST['username']);
@@ -112,7 +112,7 @@ else{
 	}
 	editUser("editmeXXX","10000","editme");
 	//listusers();
-}
+//}
 ?>
 
 PHP END -->
