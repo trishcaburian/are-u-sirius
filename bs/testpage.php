@@ -119,7 +119,7 @@ else{*/
 		foreach($array as $value){
 			$delUsercommand ="sudo smbldap-userdel ".$value;
 			$pythnewuserlist = shell_exec($delUsercommand." 2>&1");
-			echo "executed";	
+			echo "<script type='text/javascript'>alert('Successfully deleted selected users.')</script>";	
 		}	
 	}
 	
