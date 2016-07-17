@@ -221,8 +221,8 @@ PHP END -->
 						  </button>
 						  <ul class="dropdown-menu dropdown-menu-right">
 							<li data-toggle="modal" data-target="#adduserModal"><a href="#" class="btn btn-danger btn-fab del_anchor" id="round_btn" data-toggle="tooltip" data-placement="top" title="Add User" ><i class="material-icons">note_add</i></a></li>
-							<li><a href="#" class="btn btn-danger btn-fab del_anchor" id="round_btn" data-toggle="tooltip" data-placement="top" title="Edit User"><i class="material-icons">mode_edit</i></a></li> 
-							<li><a href="#" class="btn btn-danger btn-fab del_anchor" id="round_btn" data-toggle="tooltip" data-placement="top" title="Delete User"><i class="material-icons">clear</i></a></li>
+							<li data-toggle="modal" data-target="#edituserModal"><a href="#" class="btn btn-danger btn-fab del_anchor" id="round_btn" data-toggle="tooltip" data-placement="top" title="Edit User"><i class="material-icons">mode_edit</i></a></li> 
+							<li data-toggle="modal" data-target="#deleteuserModal"><a href="#" class="btn btn-danger btn-fab del_anchor" id="round_btn" data-toggle="tooltip" data-placement="top" title="Delete User"><i class="material-icons">clear</i></a></li>
 						  </ul>
 						</div>  
 						
@@ -259,7 +259,7 @@ PHP END -->
 										</button>
 										<h4 class="modal-title" id="myModalLabel1">Add New User</h4>
 									</div>
-									<form id='newuser' action='<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>' method='post' accept-charset='UTF-8'>
+									<!-- <form id='newuser' action='<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>' method='post' accept-charset='UTF-8'> -->
 										<div class="modal-body">
 										
 											<fieldset >
@@ -300,6 +300,81 @@ PHP END -->
 							</div>
 						</div>
 						<!-- END -->
+						
+						<!-- Modal edit user -->
+						<div class="modal fade" id="edituserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">×</span>
+										</button>
+										<h4 class="modal-title" id="myModalLabel1">Add New User</h4>
+									</div>
+									<!-- <form id='edituser' action='<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>' method='post' accept-charset='UTF-8'> -->
+										<div class="modal-body">
+										
+											<fieldset >
+												<!--<legend>Add New User</legend-->
+												<!--<input type='hidden' class="form-control" name='submitted' id='submitted' value='1'/>-->
+												
+												<div class="form-group">
+													<label for='username' >UserName*:</label>
+													<input type='text' class="form-control" name='username' id='username' maxlength="50" required/>
+												</div>
+												
+												<div class="form-group">
+													<label for='usergroup' >Group*:</label>
+													<input type='text' class="form-control" name='usergroup' id='firstname' maxlength="50" required/>
+												</div>
+											</fieldset>
+										
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+											<!-- if nextuser, open clean modal. possibly php-handled -->
+											<input type='submit' class="btn btn-primary" name='edituser' value='Submit' />
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+						<!-- END -->
+						
+						<!-- Modal delete user -->
+						<div class="modal fade" id="deleteuserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">×</span>
+										</button>
+										<h4 class="modal-title" id="myModalLabel1">Add New User</h4>
+									</div>
+									<!-- <form id='deleteuser' action='<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>' method='post' accept-charset='UTF-8'> -->
+										<div class="modal-body">
+										
+											<fieldset >
+												<!--<legend>Add New User</legend-->
+												<!--<input type='hidden' class="form-control" name='submitted' id='submitted' value='1'/>-->
+												
+												<div class="form-group">
+													<label >Are you sure you want to delete these users?</label>
+													<!-- < insert table here> -->
+												</div>
+											</fieldset>
+										
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+											<input type='submit' class="btn btn-primary" name='deleteuser' value='Yes' />
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+						<!-- END -->
+						
 					</div>
 				 </div> 
 			<!-- </div> -->
@@ -310,7 +385,7 @@ PHP END -->
 						  <button type="button" class="btn btn-info btn-fab" id="round_btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><i class="material-icons">add</i>
 						  </button>
 						  <ul class="dropdown-menu dropdown-menu-right">
-							<li><a href="#" class="btn btn-danger btn-fab del_anchor" id="round_btn" data-toggle="tooltip" data-placement="top" title="Add Machine"><i class="material-icons">note_add</i></a></li>
+							<li data-toggle="modal" data-target="#add-deviceModal"><a href="#" class="btn btn-danger btn-fab del_anchor" id="round_btn" data-toggle="tooltip" data-placement="top" title="Add Machine"><i class="material-icons">note_add</i></a></li>
 							<li><a href="#" class="btn btn-danger btn-fab del_anchor" id="round_btn" data-toggle="tooltip" data-placement="top" title="Edit Machine"><i class="material-icons">mode_edit</i></a></li> 
 							<li><a href="#" class="btn btn-danger btn-fab del_anchor" id="round_btn" data-toggle="tooltip" data-placement="top" title="Delete Machine"><i class="material-icons">clear</i></a></li>
 						  </ul>
