@@ -183,12 +183,12 @@ PHP END -->
 	</style>
 	<!--testing modalkeepopen-->
 	<script type='text/javascript'>
-		<?php if(isset($_POST['add-device']))?>
+		<?php if(isset($_POST['add-device'])){ ?>
 			$(function() {                       // On DOM ready
                 $('#add-deviceModal').modal('show');     // Show the modal
             });
 		<?php } ?>
-	</style>
+	</script>
   </head>
   <body>
 
@@ -224,6 +224,7 @@ PHP END -->
 			<div class="tab-pane" id="userlist" role="tabpanel">
 				<div class="container">
 					<!-- <?php //echo $getuseroutput ?> -->
+					<form> 
 					<table class="table">
 						<thead class="thead-inverse">
 							<tr>
@@ -237,9 +238,8 @@ PHP END -->
 							<?php generateUserTable() ?>
 						</tbody>
 					</table>
-					
+					</form>
 					<!-- Button trigger modal -->
-					<
 					<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#adduserModal">
 						Add new user
 					</button>
