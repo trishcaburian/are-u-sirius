@@ -227,8 +227,8 @@ PHP END -->
 						  </button>
 						  <ul class="dropdown-menu dropdown-menu-right">
 							<li data-toggle="modal" data-target="#adduserModal"><a href="#" class="btn btn-danger btn-fab del_anchor" id="round_btn" data-toggle="tooltip" data-placement="top" title="Add User" ><i class="material-icons">note_add</i></a></li>
-							<lidata-toggle="modal" data-target="#confirmdeleteModal"><a href="#" class="btn btn-danger btn-fab del_anchor" id="round_btn" data-toggle="tooltip" data-placement="top" title="Edit User"><i class="material-icons">mode_edit</i></a></li> 
-							<li><a href="#" class="btn btn-danger btn-fab del_anchor" id="round_btn" data-toggle="tooltip" data-placement="top" title="Delete User"><i class="material-icons">clear</i></a></li>
+							<li><a href="#" class="btn btn-danger btn-fab del_anchor" id="round_btn" data-toggle="tooltip" data-placement="top" title="Edit User"><i class="material-icons">mode_edit</i></a></li> 
+							<li data-toggle="modal" data-target="#confirmdeleteModal"><a href="#" class="btn btn-danger btn-fab del_anchor" id="round_btn" data-toggle="tooltip" data-placement="top" title="Delete User"><i class="material-icons">clear</i></a></li>
 						  </ul>
 						</div>  
 					<!-- floating action button END -->
@@ -253,11 +253,20 @@ PHP END -->
 						<!-- delete users confirm modal -->
 						<div class="modal fade" id="confirmdeleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
 							<!--<form id="userdel" action='' method='post' accept-charset='UTF-8'>-->
-								<div class="modal-body">
-									Are you sure you want to delete these users? <!-- maybe show selected users? -->
-								</div>
-								<div class="modal-footer">
-									<input type='submit' class="btn btn-primary" name='confirmdelete' value='Submit' form="usertable-form"/>
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true">×</span>
+											</button>
+										</div>
+										<div class="modal-body">
+											Are you sure you want to delete these users? <!-- maybe show selected users? -->
+										</div>
+										<div class="modal-footer">
+											<input type='submit' class="btn btn-primary" name='confirmdelete' value='Submit' form="usertable-form"/>
+										</div>
+									</div>
 								</div>
 							<!--</form>-->
 						</div>
