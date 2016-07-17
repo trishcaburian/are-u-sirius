@@ -32,8 +32,10 @@ else{*/
 	}
 	
 	else if(isset($_POST['add-device'])){
-		//insert add device code here
-		header("Location: starter.html");	
+		$device = trim($_POST['devicename']);
+		$ndcomm = "sudo smbldap-useradd -w ".$device;
+		$ndexec = shell_exec($ndcomm." 2>&1");
+		echo "<script type='text/javascript'>alert('Successfully added device ".$device."!')</script>";
 	}
 	
 	function test(){
@@ -324,15 +326,10 @@ PHP END -->
 								<tr>
 									<th> </th>
 									<th>Device Name</th>
-									<th>IP Address</th>
 								</tr>
 							</thead>
 							<tbody>
-								<td>
-									<input type="checkbox" name="userchk">
-								</td>
-								<th>PC1</th>
-								<td>---------</td>
+								<?php generateMachineTable() ?>
 							</tbody>
 						</table>
 					<!--</form>-->
