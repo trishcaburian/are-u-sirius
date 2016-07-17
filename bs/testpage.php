@@ -31,19 +31,20 @@ else{*/
 		}
 		header("Location: testpage.php#userlist");
 	}
-	
-	else if(isset($_POST['confirmdelete'])){
+	else if(isset($_POST['confirmdelete']) || isset($_POST['delete-device'])){ //since a machine is also technically a user, we will use the same command to delete it
 		deleteUser($_POST['checkbox']);
 		header("Location: testpage.php#userlist");
 	}
-	
 	else if(isset($_POST['add-device'])){
 		$device = trim($_POST['devicename']);
 		$ndcomm = "sudo smbldap-useradd -w ".$device;
 		$ndexec = shell_exec($ndcomm." 2>&1");
 		echo "<script type='text/javascript'>alert('Successfully added device ".$device."!')</script>";
 	}
-	
+	else if(isset($_POST['delete-device'])){
+		deleteUser($_POST['checkbox']);
+		header("Location: testpage.php#devicelist");
+	}
 
 	//list users
 	function listUsers(){
@@ -376,7 +377,7 @@ PHP END -->
 													  <thead>
 														<tr>
 														  <th>#</th>
-														  <th>First Name</th>
+														  <th>Username</th>
 														</tr>
 													  </thead>
 													  <tbody class=" deletetable deluserListTable">
@@ -556,7 +557,7 @@ PHP END -->
 
 				<div class="container hadoopIframe">
 					<!-- replace the src to hadoop's web interface. current src is for testing only -->
-					<iframe src="http://www.w3schools.com">iframes not supported?</iframe>
+					<iframe src="http://192.168.100.140:50070/dfshealth.html#tab-overview">iframes not supported?</iframe>
 				</div>
 				<!--floating action button-->
 						 <div class="btn-group btn-group-lg dropup floating-action-button-custom" id="floatingbutton" valign="bottom">
