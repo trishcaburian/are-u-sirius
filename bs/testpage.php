@@ -743,47 +743,6 @@ PHP END -->
 		});
 	});
 	</script>  -->
-	<script>
-		$(document).ready(function(){
-		<!-- <td><input type='checkbox' name='checkbox[]' value='gendo'> </td> -->
-		        $(".username-table").append(" <tr><td><input type='checkbox' name='userCheckbox[]' value='gend0'></td><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>"); 
-		        $(".username-table").append(" <tr><td><input type='checkbox' name='userCheckbox[]' value='1'></td><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
-		        $(".username-table").append(" <tr><td><input type='checkbox' name='userCheckbox[]' value='2'></td><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
-		        $(".username-table").append(" <tr><td><input type='checkbox' name='userCheckbox[]' value='3'></td><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
-		        $(".username-table").append(" <tr><td><input type='checkbox' name='userCheckbox[]' value='4'></td><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
-		        $(".username-table").append(" <tr><td><input type='checkbox' name='userCheckbox[]' value='5'></td><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
-		        $(".username-table").append(" <tr><td><input type='checkbox' name='userCheckbox[]' value='6'></td><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
-		        $(".username-table").append(" <tr><td><input type='checkbox' name='userCheckbox[]' value='7'></td><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
-		        $(".username-table").append(" <tr><td><input type='checkbox' name='userCheckbox[]' value='8'></td><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
-		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
-		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
-		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
-				
-				//$(".duserModal").click(function(){
-				//	alert("The paragraph was clicked.");
-				//}); 
-		});
-	</script>
-	 <script>
-		$(document).ready(function(){
-		        $(".DeviceTable").append(" <tr><td><input type='checkbox' name='userCheckbox[]' value='gend0'></td><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>"); 
-		        $(".DeviceTable").append(" <tr><td><input type='checkbox' name='userCheckbox[]' value='m1'></td><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
-		        $(".DeviceTable").append(" <tr><td><input type='checkbox' name='userCheckbox[]' value='m2'></td><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
-		        $(".DeviceTable").append(" <tr><td><input type='checkbox' name='userCheckbox[]' value='m3'></td><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
-		        $(".DeviceTable").append(" <tr><td><input type='checkbox' name='userCheckbox[]' value='m4'></td><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
-		        $(".DeviceTable").append(" <tr><td><input type='checkbox' name='userCheckbox[]' value='m5'></td><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
-		        $(".DeviceTable").append(" <tr><td><input type='checkbox' name='userCheckbox[]' value='m6'></td><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
-		        $(".DeviceTable").append(" <tr><td><input type='checkbox' name='userCheckbox[]' value='m7'></td><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
-		        $(".DeviceTable").append(" <tr><td><input type='checkbox' name='userCheckbox[]' value='m8'></td><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
-		        $(".DeviceTable").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
-		        $(".DeviceTable").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
-		        $(".DeviceTable").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
-				
-				//$(".duserModal").click(function(){
-				//	alert("The paragraph was clicked.");
-				//}); 
-		});
-	</script>
 
   </body>
 </html>
