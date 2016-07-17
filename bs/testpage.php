@@ -226,13 +226,8 @@ PHP END -->
 						  </button>
 						  <ul class="dropdown-menu dropdown-menu-right">
 							<li data-toggle="modal" data-target="#adduserModal"><a href="#" class="btn btn-danger btn-fab del_anchor" id="round_btn" data-toggle="tooltip" data-placement="top" title="Add User" ><i class="material-icons">note_add</i></a></li>
-<<<<<<< HEAD
 							<li data-toggle="modal" data-target="#edituserModal"><a href="#" class="btn btn-danger btn-fab del_anchor" id="round_btn" data-toggle="tooltip" data-placement="top" title="Edit User"><i class="material-icons">mode_edit</i></a></li> 
 							<li data-toggle="modal" data-target="#deleteuserModal"><a href="#" class="btn btn-danger btn-fab del_anchor" id="round_btn" data-toggle="tooltip" data-placement="top" title="Delete User"><i class="material-icons">clear</i></a></li>
-=======
-							<li><a href="#" class="btn btn-danger btn-fab del_anchor" id="round_btn" data-toggle="tooltip" data-placement="top" title="Edit User"><i class="material-icons">mode_edit</i></a></li> 
-							<li data-toggle="modal" data-target="#confirmdeleteModal"><a href="#" class="btn btn-danger btn-fab del_anchor" id="round_btn" data-toggle="tooltip" data-placement="top" title="Delete User"><i class="material-icons">clear</i></a></li>
->>>>>>> trishUtility
 						  </ul>
 						</div>  
 					<!-- floating action button END -->
@@ -398,7 +393,7 @@ PHP END -->
 										</div>
 										<div class="modal-footer">
 											<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-											<input type='submit' class="btn btn-primary" name='deleteuser' value='Yes' />
+											<input type='submit' class="btn btn-primary" name='confirmdelete' value='Yes' form="usertable-form"/>
 										</div>
 									</form>
 								</div>
