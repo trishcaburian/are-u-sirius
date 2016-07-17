@@ -7,7 +7,7 @@
 }
 else{*/
 //formhandling
-	if(isset($_POST['newuser'])){
+	if(isset($_POST['adduser'])){
 		$username = trim($_POST['username']);
 		$password = trim($_POST['password']);
 		$firstname = trim($_POST['firstname']);
