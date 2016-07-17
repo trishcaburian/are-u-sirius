@@ -187,6 +187,7 @@ PHP END -->
 			width: 100%;
 			height: 100%;
 		}
+		.iframe-class { overflow-x:hidden; overflow-y:auto; }
 	</style>
   </head>
   <body>
@@ -490,7 +491,6 @@ PHP END -->
 												<label for='devicename' >tag name</label>
 												<!--insert dropdown of tags-->
 											</div>
-											
 										</fieldset>
 									
 									<!-- FORM END -->
@@ -640,10 +640,10 @@ PHP END -->
 	
 	var checkExist = setInterval(function() {
 	   if ($('.floating-action-button-custom').length) {
-		  console.log("Exists!");
+		  //console.log("Exists!");
 		  var name = ".floating-action-button-custom";
 		var menuYloc = null;
-		console.log ("executed");
+		//console.log ("executed");
 			pos=$(name).position();
 			temp=$(name).css("top", pos.top + "px");
 			console.log($(name).position());
