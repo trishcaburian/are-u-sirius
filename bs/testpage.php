@@ -31,10 +31,10 @@ else{*/
 		}
 	}
 	
-	/*else if($_POST && isset($_POST['add-device'], $_POST['devicename'])){
+	else if(isset($_POST['add-device'])){
 		//insert add device code here
-		echo "<script type='text/javascript'>alert('this thing works')</script>";	
-	}*/
+		header("Location: starter.html");	
+	}
 	
 	function test(){
 		 print_r($_POST['checkbox']); 
@@ -292,7 +292,6 @@ PHP END -->
 										<div class="modal-footer">
 											<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 											<!-- if nextuser, open clean modal. possibly php-handled -->
-											<input type='submit' class="btn btn-info" name='nextuser' value='Submit and Add another user' />
 											<input type='submit' class="btn btn-primary" name='adduser' value='Submit' />
 										</div>
 									</form>
@@ -369,7 +368,6 @@ PHP END -->
 								
 									<div class="modal-footer">
 										<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-										<input type='submit' class="btn btn-info" name='nextuser' value='Submit and Add new device' />
 										<input type='submit' class="btn btn-primary" name='add-device' value='Submit' />
 									</div>
 								</form>
