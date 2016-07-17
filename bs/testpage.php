@@ -29,10 +29,12 @@ else{*/
 		else{
 			echo "<script type='text/javascript'>alert('$pythadduser')</script>";
 		}
+		header("Location: testpage.php#userlist");
 	}
 	
 	else if(isset($_POST['confirmdelete'])){
 		deleteUser($_POST['checkbox']);
+		header("Location: testpage.php#userlist");
 	}
 	
 	else if(isset($_POST['add-device'])){
@@ -42,9 +44,6 @@ else{*/
 		echo "<script type='text/javascript'>alert('Successfully added device ".$device."!')</script>";
 	}
 	
-	function test(){
-		 print_r($_POST['checkbox']); 
-	}
 
 	//list users
 	function listUsers(){
