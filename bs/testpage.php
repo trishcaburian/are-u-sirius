@@ -355,7 +355,7 @@ PHP END -->
 										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 											<span aria-hidden="true">×</span>
 										</button>
-										<h4 class="modal-title" id="myModalLabel1">Add New User</h4>
+										<h4 class="modal-title" id="myModalLabel1">Confirm Deletion</h4>
 									</div>
 									<!-- <form id='deleteuser' action='<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>' method='post' accept-charset='UTF-8'> -->
 										<div class="modal-body">
