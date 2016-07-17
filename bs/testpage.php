@@ -29,16 +29,21 @@ else{*/
 		else{
 			echo "<script type='text/javascript'>alert('$pythadduser')</script>";
 		}
+		header("Location: testpage.php#userlist");
 	}
 	
-	/*else if($_POST && isset($_POST['add-device'], $_POST['devicename'])){
-		//insert add device code here
-		echo "<script type='text/javascript'>alert('this thing works')</script>";	
-	}*/
-	
-	function test(){
-		 print_r($_POST['checkbox']); 
+	else if(isset($_POST['confirmdelete'])){
+		deleteUser($_POST['checkbox']);
+		header("Location: testpage.php#userlist");
 	}
+	
+	else if(isset($_POST['add-device'])){
+		$device = trim($_POST['devicename']);
+		$ndcomm = "sudo smbldap-useradd -w ".$device;
+		$ndexec = shell_exec($ndcomm." 2>&1");
+		echo "<script type='text/javascript'>alert('Successfully added device ".$device."!')</script>";
+	}
+	
 
 	//list users
 	function listUsers(){
@@ -114,7 +119,7 @@ else{*/
 		foreach($array as $value){
 			$delUsercommand ="sudo smbldap-userdel ".$value;
 			$pythnewuserlist = shell_exec($delUsercommand." 2>&1");
-			echo "executed";	
+			echo "<script type='text/javascript'>alert('Successfully deleted selected users.')</script>";	
 		}	
 	}
 	
@@ -215,33 +220,60 @@ PHP END -->
 		<div class="tab-content">
 				<div class="tab-pane" id="userlist" role="tabpanel">
 				
-				<!--floating action button-->
-						 <div class="btn-group btn-group-lg dropup floating-action-button-custom" id="floatingbutton" valign="bottom">
+					<!--floating action button-->
+						<div class="btn-group btn-group-lg dropup floating-action-button-custom" id="floatingbutton" valign="bottom">
 						  <button type="button" class="btn btn-info btn-fab" id="round_btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><i class="material-icons">add</i>
 						  </button>
 						  <ul class="dropdown-menu dropdown-menu-right">
 							<li data-toggle="modal" data-target="#adduserModal"><a href="#" class="btn btn-danger btn-fab del_anchor" id="round_btn" data-toggle="tooltip" data-placement="top" title="Add User" ><i class="material-icons">note_add</i></a></li>
+<<<<<<< HEAD
 							<li data-toggle="modal" data-target="#edituserModal"><a href="#" class="btn btn-danger btn-fab del_anchor" id="round_btn" data-toggle="tooltip" data-placement="top" title="Edit User"><i class="material-icons">mode_edit</i></a></li> 
 							<li data-toggle="modal" data-target="#deleteuserModal"><a href="#" class="btn btn-danger btn-fab del_anchor" id="round_btn" data-toggle="tooltip" data-placement="top" title="Delete User"><i class="material-icons">clear</i></a></li>
+=======
+							<li><a href="#" class="btn btn-danger btn-fab del_anchor" id="round_btn" data-toggle="tooltip" data-placement="top" title="Edit User"><i class="material-icons">mode_edit</i></a></li> 
+							<li data-toggle="modal" data-target="#confirmdeleteModal"><a href="#" class="btn btn-danger btn-fab del_anchor" id="round_btn" data-toggle="tooltip" data-placement="top" title="Delete User"><i class="material-icons">clear</i></a></li>
+>>>>>>> trishUtility
 						  </ul>
 						</div>  
-						
+					<!-- floating action button END -->
+					
 					<div class="container">
-						<!-- <?php //echo $getuseroutput ?> -->
-						<table class="table">
-							<thead class="thead-inverse">
-								<tr>
-									<th>Username</th>
-									<th>First Name</th>
-									<th>Group</th>
-									<th>...</th>
-								</tr>
-							</thead>
-							<tbody class="username-table">
-								<?php generateUserTable() ?>
-							</tbody>
-						</table>
+						<form id='usertable-form' action='' method='post' accept-charset='UTF-8'>
+							<table class="table">
+								<thead class="thead-inverse">
+									<tr>
+										<th> </th>
+										<th>Username</th>
+										<th>First Name</th>
+										<th>Group</th>
+									</tr>
+								</thead>
+								<tbody class="username-table">
+									<?php generateUserTable() ?>
+								</tbody>
+							</table>
+						</form>
 						
+						<!-- delete users confirm modal -->
+						<div class="modal fade" id="confirmdeleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+							<!--<form id="userdel" action='' method='post' accept-charset='UTF-8'>-->
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true">×</span>
+											</button>
+										</div>
+										<div class="modal-body">
+											Are you sure you want to delete these users? <!-- maybe show selected users? -->
+										</div>
+										<div class="modal-footer">
+											<input type='submit' class="btn btn-primary" name='confirmdelete' value='Submit' form="usertable-form"/>
+										</div>
+									</div>
+								</div>
+							<!--</form>-->
+						</div>
 						<!-- Button trigger modal -->
 						<!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#adduserModal">
 							Add new user
@@ -292,7 +324,6 @@ PHP END -->
 										<div class="modal-footer">
 											<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 											<!-- if nextuser, open clean modal. possibly php-handled -->
-											<input type='submit' class="btn btn-info" name='nextuser' value='Submit and Add another user' />
 											<input type='submit' class="btn btn-primary" name='adduser' value='Submit' />
 										</div>
 									</form>
@@ -393,24 +424,17 @@ PHP END -->
 				
 				<div class="container">
 
-
-					<!--<form id='usermgmt' action=" " method="post">-->
-						<table class="table">
-							<thead class="thead-inverse">
-								<tr>
-									<th> </th>
-									<th>Device Name</th>
-									<th>IP Address</th>
-								</tr>
-							</thead>
-							<tbody>
-								<td>
-									<input type="checkbox" name="userchk">
-								</td>
-								<th>PC1</th>
-								<td>---------</td>
-							</tbody>
-						</table>
+					<table class="table">
+						<thead class="thead-inverse">
+							<tr>
+								<th> </th>
+								<th>Device Name</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php generateMachineTable() ?>
+						</tbody>
+					</table>
 					<!--</form>-->
 
 					<!-- new device button -->
@@ -444,7 +468,6 @@ PHP END -->
 								
 									<div class="modal-footer">
 										<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-										<input type='submit' class="btn btn-info" name='nextuser' value='Submit and Add new device' />
 										<input type='submit' class="btn btn-primary" name='add-device' value='Submit' />
 									</div>
 								</form>
@@ -648,24 +671,6 @@ PHP END -->
 	
 	 </script>
 	 
-	 <script>
-		$(document).ready(function(){
-		
-		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
-		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
-		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
-		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
-		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
-		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
-		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
-		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
-		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
-		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
-		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
-		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
-		});
-	</script>
-	
 	 <script>
 	$(document).ready(function(){
 		$('[data-toggle="tooltip"]').tooltip();   
