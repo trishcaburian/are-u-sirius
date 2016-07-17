@@ -7,7 +7,7 @@
 }
 else{*/
 //formhandling
-	if($_POST && isset($_POST['newuser'], $_POST['adduser'], $_POST['firstname'], $_POST['surname'], $_POST['usergroup'], $_POST['password'], $_POST['username'])){
+	if($_POST && isset($_POST['adduser'], $_POST['firstname'], $_POST['surname'], $_POST['usergroup'], $_POST['password'], $_POST['username'])){
 		$username = trim($_POST['username']);
 		$password = trim($_POST['password']);
 		$firstname = trim($_POST['firstname']);
@@ -31,15 +31,15 @@ else{*/
 		}
 	}
 	
-	else if($_POST && isset($_POST['newdevice'], $_POST['add-device'], $_POST['devicename'])){
+	/*else if($_POST && isset($_POST['add-device'], $_POST['devicename'])){
 		//insert add device code here
 		echo "<script type='text/javascript'>alert('this thing works')</script>";	
-	}
+	}*/
 	
 	function test(){
 		 print_r($_POST['checkbox']); 
 	}
-	//list users
+
 	//list users
 	function listUsers(){
 		$getUsercommand = "sudo smbldap-userlist -u | awk '{print $2}'";
@@ -68,11 +68,9 @@ else{*/
 			//User group lookup
 			$gidcomm = "smbldap-usershow ".$user." | awk '/gidNumber: / {{ print $2 }}'";
 			$getgid = trim(shell_exec($gidcomm." 2>&1"));
-			//$getgid = trim($getgid);
 			
 			$gnamecomm = "sudo smbldap-grouplist | awk '/".$getgid."/ {{print $2,$3}}'";
 			$getgrpname = trim(shell_exec($gnamecomm." 2>&1"));
-			//$getgrpname = trim($getgrpname);
 			$userGroup = trim(str_replace('|',"",$getgrpname));
 			
 			echo '<tr>';
@@ -110,11 +108,7 @@ else{*/
 			echo '</tr>';
 		}
 	}
-	//delete from smbldap	
-	//$userdel="deleteme";
-	//$deleteUsercommand = "sudo smbldap-userdel ".$userdel;
-	//$pythnewuserlist = shell_exec($deleteUsercommand." 2>&1");
-	//echo $pythnewuserlist;
+	
 	function deleteUser($array){
 		//$array =array("del1","del2","del3");
 		foreach($array as $value){
@@ -123,10 +117,6 @@ else{*/
 			echo "executed";	
 		}	
 	}
-	//$getUsercommand = "sudo smbldap-userlist | awk '{print $2}'";
-	//$pythuserlist = shell_exec($getUsercommand." 2>&1");
-	/*echo "<script type='text/javascript'>alert('$pythadduser')</script>";*/	
-	//$userlistTrimmed=str_replace('|',"",$pythuserlist);
 	
 	function convertGrStringtoGID($groupName){
 		$getGIDcommand="sudo smbldap-grouplist | awk '/".$groupName."/ {{print $1}}'";
@@ -149,8 +139,6 @@ else{*/
 			$editusercommand=$editusercommand." ".$oldusername;
 			echo $editusercommand;
 	}
-	editUser("editmeXXX","10000","editme");
-	//listusers();
 //}
 ?>
 
@@ -192,6 +180,14 @@ PHP END -->
 			width: 100%;
 			height: 100%;
 		}
+	</style>
+	<!--testing modalkeepopen-->
+	<script type='text/javascript'>
+		<?php if(isset($_POST['add-device']))?>
+			$(function() {                       // On DOM ready
+                $('#add-deviceModal').modal('show');     // Show the modal
+            });
+		<?php } ?>
 	</style>
   </head>
   <body>
@@ -243,6 +239,7 @@ PHP END -->
 					</table>
 					
 					<!-- Button trigger modal -->
+					<
 					<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#adduserModal">
 						Add new user
 					</button>
@@ -292,7 +289,6 @@ PHP END -->
 									<div class="modal-footer">
 										<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 										<!-- if nextuser, open clean modal. possibly php-handled -->
-										<input type='submit' class="btn btn-info" name='nextuser' value='Submit and Add another user' />
 										<input type='submit' class="btn btn-primary" name='adduser' value='Submit' />
 									</div>
 								</form>
@@ -357,7 +353,6 @@ PHP END -->
 								
 									<div class="modal-footer">
 										<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-										<input type='submit' class="btn btn-info" name='nextuser' value='Submit and Add new device' />
 										<input type='submit' class="btn btn-primary" name='add-device' value='Submit' />
 									</div>
 								</form>
