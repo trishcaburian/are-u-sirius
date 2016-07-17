@@ -386,8 +386,8 @@ PHP END -->
 						  </button>
 						  <ul class="dropdown-menu dropdown-menu-right">
 							<li data-toggle="modal" data-target="#add-deviceModal"><a href="#" class="btn btn-danger btn-fab del_anchor" id="round_btn" data-toggle="tooltip" data-placement="top" title="Add Machine"><i class="material-icons">note_add</i></a></li>
-							<li><a href="#" class="btn btn-danger btn-fab del_anchor" id="round_btn" data-toggle="tooltip" data-placement="top" title="Edit Machine"><i class="material-icons">mode_edit</i></a></li> 
-							<li><a href="#" class="btn btn-danger btn-fab del_anchor" id="round_btn" data-toggle="tooltip" data-placement="top" title="Delete Machine"><i class="material-icons">clear</i></a></li>
+							<li data-toggle="modal" data-target="#edit-deviceModal"><a href="#" class="btn btn-danger btn-fab del_anchor" id="round_btn" data-toggle="tooltip" data-placement="top" title="Edit Machine"><i class="material-icons">mode_edit</i></a></li> 
+							<li data-toggle="modal" data-target="#delete-deviceModal"><a href="#" class="btn btn-danger btn-fab del_anchor" id="round_btn" data-toggle="tooltip" data-placement="top" title="Delete Machine"><i class="material-icons">clear</i></a></li>
 						  </ul>
 						</div> 
 				
@@ -414,9 +414,9 @@ PHP END -->
 					<!--</form>-->
 
 					<!-- new device button -->
-					<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#add-deviceModal">
+					<!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#add-deviceModal">
 						Add new device
-					</button>
+					</button> -->
 					
 					<!-- new device modal-->
 					<div class="modal fade" id="add-deviceModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
@@ -451,6 +451,79 @@ PHP END -->
 							</div>
 						</div>
 					</div>
+					<!--end add device modal-->
+					
+					<!-- edit device modal-->
+					<div class="modal fade" id="edit-deviceModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+									<h4 class="modal-title" id="myModalLabel1">Add device</h4>
+								</div>
+								<!-- editdevice form -->
+								<form id='editdevice' action=" " method='post' accept-charset='UTF-8'>
+									<div class="modal-body">
+										<fieldset >
+											<div class="form-group">
+												<label for='devicename' >Device Name*:</label>
+												
+												<label for='devicename' >tag name</label>
+												<!--insert dropdown of tags-->
+											</div>
+											
+										</fieldset>
+									
+									<!-- FORM END -->
+									</div>
+								
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+										<input type='submit' class="btn btn-info" name='nextuser' value='Submit and Add new device' />
+										<input type='submit' class="btn btn-primary" name='edit-device' value='Submit' />
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+					<!--end edit device modal-->
+					
+					<!-- delete device modal-->
+					<div class="modal fade" id="delete-deviceModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+									<h4 class="modal-title" id="myModalLabel1">Add device</h4>
+								</div>
+								<!-- deletedevice form -->
+								<form id='deletedevice' action=" " method='post' accept-charset='UTF-8'>
+									<div class="modal-body">
+										<fieldset >
+											<div class="form-group">
+												<label for='devicename' >are you sure you want to delete these machines?</label>
+												<!--insert table for machines-->
+											</div>
+											
+										</fieldset>
+									
+									<!-- FORM END -->
+									</div>
+								
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+										<input type='submit' class="btn btn-primary" name='delete-device' value='Yes' />
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+					<!--end delete device modal-->
+					
 				</div>
 			</div>
 			<div class="tab-pane" id="resources" role="tabpanel">
@@ -464,10 +537,60 @@ PHP END -->
 						  <button type="button" class="btn btn-info btn-fab" id="round_btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><i class="material-icons">add</i>
 						  </button>
 						  <ul class="dropdown-menu dropdown-menu-right">
-							<li><a href="#" class="btn btn-danger btn-fab del_anchor" id="round_btn" data-toggle="tooltip" data-placement="top" title="Change Permissions"><i class="material-icons">mode_edit</i></a></li> 
+							<li data-toggle="modal" data-target="#editFilePermModal"><a href="#" class="btn btn-danger btn-fab del_anchor" id="round_btn" data-toggle="tooltip" data-placement="top" title="Change User Permissions"><i class="material-icons">mode_edit</i></a></li>  
 
 						  </ul>
 						</div> 
+					
+				<!-- Modal -->
+						<div class="modal fade" id="editFilePermModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">×</span>
+										</button>
+										<h4 class="modal-title" id="myModalLabel1">edit File Permissions</h4>
+									</div>
+									<!-- <!-- <form id='edituserPerm' action='<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>' method='post' accept-charset='UTF-8'> --> -->
+										<div class="modal-body">
+										
+											<fieldset >
+												<!--<legend>Add New User</legend-->
+												<!--<input type='hidden' class="form-control" name='submitted' id='submitted' value='1'/>-->
+												
+												<div class="form-group">
+													<label for='username' >UserName*:</label>
+													<input type='text' class="form-control" name='username' id='username' maxlength="50" required/>
+												</div>
+												<div class="form-group">
+													<label for='UserPerm' >User Permissions</label>
+													<!-- insert dropdown here<input type='text' class="form-control" name='firstname' id='firstname' maxlength="50" required/> -->
+												</div>
+												<div class="form-group">
+													<label for='Group' >Group</label>
+													<!-- insert dropdown here<input type='text' class="form-control" name='firstname' id='firstname' maxlength="50" required/> -->
+												</div>
+												<div class="form-group">
+													<label for='GroupPerm' >Group Permissions</label>
+													<!-- insert dropdown here<input type='text' class="form-control" name='firstname' id='firstname' maxlength="50" required/> -->
+												</div>
+												
+											</fieldset>
+										
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+											<!-- if nextuser, open clean modal. possibly php-handled -->
+											<input type='submit' class="btn btn-info" name='nextFilePerm' value='Submit and edit another File' />
+											<input type='submit' class="btn btn-primary" name='editFilePerm' value='Submit' />
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+						<!-- END -->
+						
 			</div>
 		</div>
 		
