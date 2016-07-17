@@ -249,26 +249,6 @@ PHP END -->
 							</table>
 						</form>
 						
-						<!-- delete users confirm modal -->
-						<div class="modal fade" id="confirmdeleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
-							<!--<form id="userdel" action='' method='post' accept-charset='UTF-8'>-->
-								<div class="modal-dialog" role="document">
-									<div class="modal-content">
-										<div class="modal-header">
-											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-												<span aria-hidden="true">×</span>
-											</button>
-										</div>
-										<div class="modal-body">
-											Are you sure you want to delete these users? <!-- maybe show selected users? -->
-										</div>
-										<div class="modal-footer">
-											<input type='submit' class="btn btn-primary" name='confirmdelete' value='Submit' form="usertable-form"/>
-										</div>
-									</div>
-								</div>
-							<!--</form>-->
-						</div>
 						<!-- Button trigger modal -->
 						<!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#adduserModal">
 							Add new user
