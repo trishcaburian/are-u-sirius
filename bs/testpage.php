@@ -283,19 +283,19 @@ PHP END -->
 												</div>
 												<div class="form-group">
 													<label for='password' >Password*:</label>
-													<input type='password' class="form-control" name='password' id='password' maxlength="50" required/>
+													<input type='password' class="form-control" name='password' id='password' maxlength="50" autocomplete="off" required/>
 												</div>
 												<div class="form-group">
 													<label for='firstname' >First Name*:</label>
-													<input type='text' class="form-control" name='firstname' id='firstname' maxlength="50" required/>
+													<input type='text' class="form-control" name='firstname' id='firstname' maxlength="50"  autocomplete="off" required/>
 												</div>
 												<div class="form-group">
 													<label for='surname' >Surname*:</label>
-													<input type='text' class="form-control" name='surname' id='surname' maxlength="50" required/>
+													<input type='text' class="form-control" name='surname' id='surname' maxlength="50" autocomplete="off" required/>
 												</div>
 												<div class="form-group">
 													<label for='usergroup' >Group*:</label>
-													<input type='text' class="form-control" name='usergroup' id='firstname' maxlength="50" required/>
+													<input type='text' class="form-control" name='usergroup' id='firstname' maxlength="50" autocomplete="off" required/>
 												</div>
 											</fieldset>
 										
@@ -454,7 +454,7 @@ PHP END -->
 										<fieldset >
 											<div class="form-group">
 												<label for='devicename' >Device Name*:</label>
-												<input type='text' class="form-control" name='devicename' id='devicename' maxlength="50" required />
+												<input type='text' class="form-control" name='devicename' id='devicename' maxlength="50" autocomplete="off" required />
 											</div>
 											
 										</fieldset>
