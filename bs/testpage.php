@@ -479,14 +479,14 @@ PHP END -->
 									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 										<span aria-hidden="true">&times;</span>
 									</button>
-									<h4 class="modal-title" id="myModalLabel1">Add device</h4>
+									<h4 class="modal-title" id="myModalLabel1">edit device</h4>
 								</div>
 								<!-- editdevice form -->
 								<form id='editdevice' action=" " method='post' accept-charset='UTF-8'>
 									<div class="modal-body">
 										<fieldset >
 											<div class="form-group">
-												<label for='devicename' >Device Name*:</label>
+												<label for='devicename' id="edit-deviceLabel" ></label>
 												
 												<label for='devicename' >tag name</label>
 												<!--insert dropdown of tags-->
@@ -515,7 +515,7 @@ PHP END -->
 									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 										<span aria-hidden="true">&times;</span>
 									</button>
-									<h4 class="modal-title" id="myModalLabel1">Add device</h4>
+									<h4 class="modal-title" id="myModalLabel1">delete device</h4>
 								</div>
 								<!-- deletedevice form -->
 								<form id='deletedevice' action=" " method='post' accept-charset='UTF-8'>
@@ -704,6 +704,28 @@ PHP END -->
 				$(".delMachineListTable").append("<tr><th scope="+"row>"+count+"</th><td>"+value+"</td></tr>");
 				count++;
 			});
+		});
+	</script>
+	
+	<script>
+		$(document).on('shown.bs.modal','#edit-deviceModal', function () {
+			count=1;
+			alert("was here");
+			$.each($("input[name='userCheckbox[]']:checked"), function(){      
+			value=$(this).val();
+				$(".edit-deviceLabel").append("device name*: <h4>"+value+"</h4>");
+				count++;
+			});
+		});
+	</script>
+	
+	<!-- remove label on modal close -->
+	<script>
+		$(document).on('hidden.bs.modal','#edit-deviceModal', function () {
+			count=1;
+			//alert("exit modal");
+			$(".edit-deviceLabel").empty();
+			$('input:checkbox').attr('checked', false);
 		});
 	</script>
 	
