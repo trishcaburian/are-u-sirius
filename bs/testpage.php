@@ -33,17 +33,13 @@ else{*/
 	}
 	else if(isset($_POST['confirmdelete']) || isset($_POST['delete-device'])){ //since a machine is also technically a user, we will use the same command to delete it
 		deleteUser($_POST['checkbox']);
-		header("Location: testpage.php#userlist");
+		header("Location: testpage.php");
 	}
 	else if(isset($_POST['add-device'])){
 		$device = trim($_POST['devicename']);
 		$ndcomm = "sudo smbldap-useradd -w ".$device;
 		$ndexec = shell_exec($ndcomm." 2>&1");
 		echo "<script type='text/javascript'>alert('Successfully added device ".$device."!')</script>";
-	}
-	else if(isset($_POST['delete-device'])){
-		deleteUser($_POST['checkbox']);
-		header("Location: testpage.php#devicelist");
 	}
 
 	//list users
@@ -278,7 +274,7 @@ PHP END -->
 												
 												<div class="form-group">
 													<label for='username' >UserName*:</label>
-													<input type='text' class="form-control" name='username' id='username' maxlength="50" required/>
+													<input type='text' class="form-control" name='username' id='username' maxlength="50" autocomplete="off" required/>
 												</div>
 												<div class="form-group">
 													<label for='password' >Password*:</label>
