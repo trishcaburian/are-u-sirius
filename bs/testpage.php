@@ -265,7 +265,7 @@ PHP END -->
 										</button>
 										<h4 class="modal-title" id="myModalLabel1">Add New User</h4>
 									</div>
-									<!-- <form id='newuser' action='<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>' method='post' accept-charset='UTF-8'> -->
+									<form id='newuser' action='<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>' method='post' accept-charset='UTF-8'>
 										<div class="modal-body">
 										
 											<fieldset >
