@@ -32,7 +32,12 @@ else{*/
 		header("Location: testpage.php#userlist");
 	}
 	else if(isset($_POST['confirmdelete']) or isset($_POST['delete-device'])){ //since a machine is also technically a user, we will use the same command to delete it
-		deleteUser($_POST['checkbox']);
+		if(empty($_POST['userCheckbox'])){
+			deleteUser($_POST['MachineCheckbox']);
+		}
+		else if(empty($_POST['MachineCheckbox'])){
+			deleteUser($_POST['userCheckbox']);
+		}
 		header("Location: testpage.php");
 	}
 	else if(isset($_POST['add-device'])){
