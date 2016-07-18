@@ -414,7 +414,7 @@ PHP END -->
 						</div> 
 				
 				<div class="container">
-
+				<form id='devicetable-form'	action='' method='post' accept-charset='UTF-8'>
 					<table class="table">
 						<thead class="thead-inverse">
 							<tr>
@@ -426,7 +426,7 @@ PHP END -->
 							<?php generateMachineTable() ?>
 						</tbody>
 					</table>
-					<!--</form>-->
+				</form>
 
 					<!-- new device button -->
 					<!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#add-deviceModal">
@@ -539,7 +539,7 @@ PHP END -->
 								
 									<div class="modal-footer">
 										<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-										<input type='submit' class="btn btn-primary" name='delete-device' value='Yes' />
+										<input type='submit' class="btn btn-primary" name='delete-device' value='Yes' form="devicetable-form" />
 									</div>
 								</form>
 							</div>
