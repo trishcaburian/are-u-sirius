@@ -700,7 +700,7 @@ PHP END -->
 		$(document).on('shown.bs.modal','#delete-deviceModal', function () {
 			count=1;
 			//alert("was here");
-			$.each($("input[name='userCheckbox[]']:checked"), function(){      
+			$.each($("input[name='MachineCheckbox[]']:checked"), function(){      
 			value=$(this).val();
 				$(".delMachineListTable").append("<tr><th scope="+"row>"+count+"</th><td>"+value+"</td></tr>");
 				count++;
