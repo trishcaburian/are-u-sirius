@@ -328,7 +328,7 @@ PHP END -->
 										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 											<span aria-hidden="true">×</span>
 										</button>
-										<h4 class="modal-title" id="myModalLabel1">Add New User</h4>
+										<h4 class="modal-title" id="myModalLabel1">Edit User</h4>
 									</div>
 									<!-- <form id='edituser' action='<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>' method='post' accept-charset='UTF-8'> -->
 										<div class="modal-body">
@@ -338,6 +338,7 @@ PHP END -->
 												<!--<input type='hidden' class="form-control" name='submitted' id='submitted' value='1'/>-->
 												
 												<div class="form-group">
+													<label for='old-username' class="oldusernamelabel" ></label>
 													<label for='username' >UserName*:</label>
 													<input type='text' class="form-control" name='username' id='username' maxlength="50" required/>
 												</div>
@@ -712,6 +713,28 @@ PHP END -->
 				$(".delMachineListTable").append("<tr><th scope="+"row>"+count+"</th><td>"+value+"</td></tr>");
 				count++;
 			});
+		});
+	</script>
+	
+	<script>
+		$(document).on('shown.bs.modal','#edituserModal', function () {
+			count=1;
+			alert("was here");
+			$.each($("input[name='userCheckbox[]']:checked"), function(){      
+			value=$(this).val();
+				$(".oldusernamelabel").append("UserName*: <h4>"+value+"</h4>");
+				count++;
+			});
+		});
+	</script>
+	
+	<!-- remove label on modal close -->
+	<script>
+		$(document).on('hidden.bs.modal','#edit-deviceModal', function () {
+			count=1;
+			//alert("exit modal");
+			$(".edit-deviceLabel").empty();
+			$('input:checkbox').attr('checked', false);
 		});
 	</script>
 	
