@@ -340,7 +340,7 @@ PHP END -->
 												<div class="form-group">
 													
 													<label for='username' >New UserName*:</label>
-													<input type='text' class="form-control" name='username' id='newusername' maxlength="50" required/>
+													<input type='text' class="form-control" name='newusername' id='newusername' maxlength="50" required/>
 												</div>
 												
 												<select id="edituserModalDropdown">
@@ -490,17 +490,19 @@ PHP END -->
 									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 										<span aria-hidden="true">&times;</span>
 									</button>
-									<h4 class="modal-title" id="myModalLabel1">edit device</h4>
+									<h4 class="modal-title" id="myModalLabel1">edit device <div class="editdevicediv" ></div></h4>
 								</div>
 								<!-- editdevice form -->
 								<form id='editdevice' action=" " method='post' accept-charset='UTF-8'>
 									<div class="modal-body">
 										<fieldset >
 											<div class="form-group">
-												<label for='devicename' id="edit-deviceLabel" ></label>
-												
 												<label for='devicename' >tag name</label>
-												<!--insert dropdown of tags-->
+												<select id="editdeviceModalDropdown">
+													<option disabled selected value> --Select_a_Tag-- </option>
+													<option>Fixed</option>
+													<option>Mobile</option>
+												</select>
 											</div>
 										</fieldset>
 									
@@ -510,7 +512,7 @@ PHP END -->
 									<div class="modal-footer">
 										<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 										<input type='submit' class="btn btn-info" name='nextuser' value='Submit and Add new device' />
-										<input type='submit' class="btn btn-primary" name='edit-device' value='Submit' />
+										<input type='submit' class="btn btn-primary" name='edit-device' value='Submit' id="editdeviceModalSubmit"/>
 									</div>
 								</form>
 							</div>
@@ -766,13 +768,29 @@ PHP END -->
 	
 	<script>
 		$(document).on('shown.bs.modal','#edit-deviceModal', function () {
-			count=1;
+			count=0;
+			value="";
 			alert("was here");
-			$.each($("input[name='userCheckbox[]']:checked"), function(){      
+			$.each($("input[name='MachineCheckbox[]']:checked"), function(){      
 			value=$(this).val();
-				$(".edit-deviceLabel").append("device name*: <h4>"+value+"</h4>");
 				count++;
 			});
+			if (count==1){
+				$(".editdevicediv").append("Machine: <span><b>"+value+"</b></span>");
+			}
+			else if(count==0){
+				value="did not select any device!";
+				$(".editdevicediv").append("<span><b>"+value+"</b></span>");
+				$('#editdeviceModalSubmit').prop('disabled', true);
+				$('input:checkbox').attr('checked', false);
+			}
+			else{
+				//alert("cannot edit more than 1 user at a time!");
+				value="cannot edit more than 1 device at a time!";
+				$(".editdevicediv").append("<span><b>"+value+"</b></span>");
+				$('#editdeviceModalSubmit').prop('disabled', true);
+				$('input:checkbox').attr('checked', false);
+			}
 		});
 	</script>
 	
@@ -781,7 +799,9 @@ PHP END -->
 		$(document).on('hidden.bs.modal','#edit-deviceModal', function () {
 			count=1;
 			//alert("exit modal");
-			$(".edit-deviceLabel").empty();
+			$(".editdevicediv").empty();
+			$('#editdeviceModalSubmit').prop('disabled', false);
+			$("#editdeviceModalDropdown").prop("selectedIndex", 0);
 			$('input:checkbox').attr('checked', false);
 		});
 	</script>
