@@ -592,7 +592,7 @@ PHP END -->
 										</button>
 										<h4 class="modal-title" id="myModalLabel1">edit File Permissions</h4>
 									</div>
-									<!-- <!-- <form id='edituserPerm' action='<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>' method='post' accept-charset='UTF-8'> --> -->
+									<!-- <!-- <form id='edituserPerm' action='<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>' method='post' accept-charset='UTF-8'> --> 
 										<div class="modal-body">
 										
 											<fieldset >
@@ -600,20 +600,44 @@ PHP END -->
 												<!--<input type='hidden' class="form-control" name='submitted' id='submitted' value='1'/>-->
 												
 												<div class="form-group">
-													<label for='username' >UserName*:</label>
-													<input type='text' class="form-control" name='username' id='username' maxlength="50" required/>
+													<label for='username' >FileName*:</label>
+													<input type='text' class="form-control" name='filename' id='filename' maxlength="50" required/>
 												</div>
 												<div class="form-group">
 													<label for='UserPerm' >User Permissions</label>
 													<!-- insert dropdown here<input type='text' class="form-control" name='firstname' id='firstname' maxlength="50" required/> -->
+												<select id="setfile_user_perm_ModalDropdown">
+													<option disabled selected value> --Select_a_Permission-- </option>
+													<option>READ</option>
+													<option>WRITE</option>
+													<option>EXECUTE</option>
+													<option>READ, WRITE</option>
+													<option>READ, WRITE, EXECUTE</option>
+												</select>
 												</div>
 												<div class="form-group">
 													<label for='Group' >Group</label>
-													<!-- insert dropdown here<input type='text' class="form-control" name='firstname' id='firstname' maxlength="50" required/> -->
+													<!-- insert dropdown here<input type='text' class="form-control" name='firstname' id='firstname' maxlength="50" required/> -->	
+												<select id="setfilePerm_Groups_ModalDropdown">
+													<option disabled selected value> --Select_a_Group-- </option>
+													<option>Admin</option>
+													<option>Faculty</option>
+													<option>Student</option>
+												</select>
+												
 												</div>
 												<div class="form-group">
 													<label for='GroupPerm' >Group Permissions</label>
 													<!-- insert dropdown here<input type='text' class="form-control" name='firstname' id='firstname' maxlength="50" required/> -->
+													
+												<select id="setfile_grp_perm_ModalDropdown">
+													<option disabled selected value> --Select_a_Permission-- </option>
+													<option>READ</option>
+													<option>WRITE</option>
+													<option>EXECUTE</option>
+													<option>READ, WRITE</option>
+													<option>READ, WRITE, EXECUTE</option>
+												</select>
 												</div>
 												
 											</fieldset>
@@ -828,6 +852,17 @@ PHP END -->
 		});
 	</script>
 	
+	<script>
+		$(document).on('hidden.bs.modal','#editFilePermModal', function () {
+			count=1;
+			//alert("exit modal");
+			$("#filename").val('');
+			$("#setfile_user_perm_ModalDropdown").prop("selectedIndex", 0);
+			$("#setfilePerm_Groups_ModalDropdown").prop("selectedIndex", 0);
+			$("#setfile_grp_perm_ModalDropdown").prop("selectedIndex", 0);
+			$('input:checkbox').attr('checked', false);
+		});
+	</script>
 	
 	<!-- check all not yet functional-->
 	<script>
