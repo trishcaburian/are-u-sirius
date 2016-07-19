@@ -328,7 +328,7 @@ PHP END -->
 										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 											<span aria-hidden="true">×</span>
 										</button>
-										<h4 class="modal-title" id="myModalLabel1">Edit User</h4>
+										<h4 class="modal-title" id="myModalLabel1">Edit User <div class="oldusernamediv" ></div></h4>
 									</div>
 									<!-- <form id='edituser' action='<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>' method='post' accept-charset='UTF-8'> -->
 										<div class="modal-body">
@@ -338,22 +338,24 @@ PHP END -->
 												<!--<input type='hidden' class="form-control" name='submitted' id='submitted' value='1'/>-->
 												
 												<div class="form-group">
-													<label for='old-username' class="oldusernamelabel" ></label>
-													<label for='username' >UserName*:</label>
-													<input type='text' class="form-control" name='username' id='username' maxlength="50" required/>
+													
+													<label for='username' >New UserName*:</label>
+													<input type='text' class="form-control" name='username' id='newusername' maxlength="50" required/>
 												</div>
 												
-												<div class="form-group">
-													<label for='usergroup' >Group*:</label>
-													<input type='text' class="form-control" name='usergroup' id='firstname' maxlength="50" required/>
-												</div>
+												<select id="edituserModalDropdown">
+													<option disabled selected value> --Select_a_Group-- </option>
+													<option>Admin</option>
+													<option>Faculty</option>
+													<option>Student</option>
+												</select>
 											</fieldset>
 										
 										</div>
 										<div class="modal-footer">
 											<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 											<!-- if nextuser, open clean modal. possibly php-handled -->
-											<input type='submit' class="btn btn-primary" name='edituser' value='Submit' />
+											<input type='submit' class="btn btn-primary" name='edituser' value='Submit' id ="edituserModalSubmit"/>
 										</div>
 									</form>
 								</div>
@@ -401,7 +403,7 @@ PHP END -->
 										</div>
 										<div class="modal-footer">
 											<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-											<input type='submit' class="btn btn-primary" name='confirmdelete' value='Yes' form="usertable-form"/>
+											<input type='submit' class="btn btn-primary" name='confirmdelete' value='Yes' form="usertable-form" id="deluserModalSubmit"/>
 										</div>
 									</form>
 								</div>
@@ -552,7 +554,7 @@ PHP END -->
 								
 									<div class="modal-footer">
 										<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-										<input type='submit' class="btn btn-primary" name='delete-device' value='Yes' form="devicetable-form" />
+										<input type='submit' class="btn btn-primary" name='delete-device' value='Yes' form="devicetable-form" id="deldeviceModalSubmit"/>
 									</div>
 								</form>
 							</div>
@@ -701,6 +703,8 @@ PHP END -->
 				$(".deluserListTable").append("<tr><th scope="+"row>"+count+"</th><td>"+value+"</td></tr>");
 				count++;
 			});
+			if (count==1)
+				$('#deluserModalSubmit').prop('disabled', true);
 		});
 	</script>
 	<!-- get all checked and add to del machine table -->
@@ -713,27 +717,49 @@ PHP END -->
 				$(".delMachineListTable").append("<tr><th scope="+"row>"+count+"</th><td>"+value+"</td></tr>");
 				count++;
 			});
+			if (count==1)
+				$('#deldeviceModalSubmit').prop('disabled', true);
+			
 		});
 	</script>
 	
 	<script>
 		$(document).on('shown.bs.modal','#edituserModal', function () {
-			count=1;
+			count=0;
+			value="";
 			alert("was here");
 			$.each($("input[name='userCheckbox[]']:checked"), function(){      
 			value=$(this).val();
-				$(".oldusernamelabel").append("UserName*: <h4>"+value+"</h4>");
 				count++;
 			});
+			if (count==1){
+				$(".oldusernamediv").append("User: <span><b>"+value+"</b></span>");
+			}
+			else if(count==0){
+				value="did not select any user!";
+				$(".oldusernamediv").append("<span><b>"+value+"</b></span>");
+				$('#edituserModalSubmit').prop('disabled', true);
+				$('input:checkbox').attr('checked', false);
+			}
+			else{
+				//alert("cannot edit more than 1 user at a time!");
+				value="cannot edit more than 1 user at a time!";
+				$(".oldusernamediv").append("<span><b>"+value+"</b></span>");
+				$('#edituserModalSubmit').prop('disabled', true);
+				$('input:checkbox').attr('checked', false);
+			}
 		});
 	</script>
 	
 	<!-- remove label on modal close -->
 	<script>
-		$(document).on('hidden.bs.modal','#edit-deviceModal', function () {
+		$(document).on('hidden.bs.modal','#edituserModal', function () {
 			count=1;
 			//alert("exit modal");
-			$(".edit-deviceLabel").empty();
+			$(".oldusernamediv").empty();
+			$("#newusername").val('');
+			$('#edituserModalSubmit').prop('disabled', false);
+			$("#edituserModalDropdown").prop("selectedIndex", 0);
 			$('input:checkbox').attr('checked', false);
 		});
 	</script>
@@ -766,6 +792,7 @@ PHP END -->
 			count=1;
 			//alert("exit modal");
 			$(".deluserListTable").empty();
+			$('#deluserModalSubmit').prop('disabled', false);
 			$('input:checkbox').attr('checked', false);
 		});
 	</script>
@@ -776,6 +803,7 @@ PHP END -->
 			count=1;
 			//alert("exit modal");
 			$(".delMachineListTable").empty();
+			$('#deldeviceModalSubmit').prop('disabled', false);
 			$('input:checkbox').attr('checked', false);
 		});
 	</script>
@@ -797,6 +825,46 @@ PHP END -->
 		});
 	});
 	</script>  -->
-
+	<script>
+		$(document).ready(function(){
+		<!-- <td><input type='checkbox' name='checkbox[]' value='gendo'> </td> -->
+		        $(".username-table").append(" <tr><td><input type='checkbox' name='userCheckbox[]' value='gend0'></td><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>"); 
+		        $(".username-table").append(" <tr><td><input type='checkbox' name='userCheckbox[]' value='1'></td><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
+		        $(".username-table").append(" <tr><td><input type='checkbox' name='userCheckbox[]' value='2'></td><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
+		        $(".username-table").append(" <tr><td><input type='checkbox' name='userCheckbox[]' value='3'></td><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
+		        $(".username-table").append(" <tr><td><input type='checkbox' name='userCheckbox[]' value='4'></td><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
+		        $(".username-table").append(" <tr><td><input type='checkbox' name='userCheckbox[]' value='5'></td><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
+		        $(".username-table").append(" <tr><td><input type='checkbox' name='userCheckbox[]' value='6'></td><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
+		        $(".username-table").append(" <tr><td><input type='checkbox' name='userCheckbox[]' value='7'></td><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
+		        $(".username-table").append(" <tr><td><input type='checkbox' name='userCheckbox[]' value='8'></td><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
+		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
+		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
+		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
+				
+				//$(".duserModal").click(function(){
+				//	alert("The paragraph was clicked.");
+				//}); 
+		});
+	</script>
+	 <script>
+		$(document).ready(function(){
+		        $(".DeviceTable").append(" <tr><td><input type='checkbox' name='MachineCheckbox[]' value='gend0'></td><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>"); 
+		        $(".DeviceTable").append(" <tr><td><input type='checkbox' name='MachineCheckbox[]' value='m1'></td><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
+		        $(".DeviceTable").append(" <tr><td><input type='checkbox' name='MachineCheckbox[]' value='m2'></td><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
+		        $(".DeviceTable").append(" <tr><td><input type='checkbox' name='MachineCheckbox[]' value='m3'></td><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
+		        $(".DeviceTable").append(" <tr><td><input type='checkbox' name='MachineCheckbox[]' value='m4'></td><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
+		        $(".DeviceTable").append(" <tr><td><input type='checkbox' name='MachineCheckbox[]' value='m5'></td><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
+		        $(".DeviceTable").append(" <tr><td><input type='checkbox' name='MachineCheckbox[]' value='m6'></td><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
+		        $(".DeviceTable").append(" <tr><td><input type='checkbox' name='MachineCheckbox[]' value='m7'></td><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
+		        $(".DeviceTable").append(" <tr><td><input type='checkbox' name='MachineCheckbox[]' value='m8'></td><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
+		        $(".DeviceTable").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
+		        $(".DeviceTable").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
+		        $(".DeviceTable").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
+				
+				//$(".duserModal").click(function(){
+				//	alert("The paragraph was clicked.");
+				//}); 
+		});
+	</script>
   </body>
 </html>
