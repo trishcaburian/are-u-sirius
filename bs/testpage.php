@@ -116,6 +116,13 @@ else{*/
 		}
 	}
 	
+	function listGroups(){
+		$grouplist = shell_exec("sudo smbldap-grouplist | awk '{print $2,$3}' 2>&1");
+		$processedGrouplist = trim(str_replace('|',"",$grouplist));
+		$grouplistArray = preg_split("/\r\n|\n|\r/", $grouplist);
+		return $grouplistArray;
+	}
+	
 	function deleteUser($array){
 		//$array =array("del1","del2","del3");
 		foreach($array as $value){
