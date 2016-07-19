@@ -287,7 +287,7 @@ PHP END -->
 												</div>
 												<div class="form-group">
 													<label for='firstname' >First Name*:</label>
-													<input type='text' class="form-control" name='firstname' id='firstname' maxlength="50"  autocomplete="off" required/>
+													<input type='text' class="form-control" name='firstname' id='firstname' maxlength="50" autocomplete="off" required/>
 												</div>
 												<div class="form-group">
 													<label for='surname' >Surname*:</label>
