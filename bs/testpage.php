@@ -1,11 +1,10 @@
 <!-- PHP START
 <?PHP
-//include("initer.php");
-//session_start();
-/*if(!isset($_SESSION['usersess'])){ 
+session_start();
+if(!isset($_SESSION['usersess'])){ 
 	header("Location: login.php");
 }
-else{*/
+else{
 //formhandling
 	if(isset($_POST['adduser'])){
 		$username = trim($_POST['username']);
@@ -202,6 +201,7 @@ PHP END -->
 
 	<div class="container">    
 		<h1>SIRIUS</h1>
+		<a href="logout.php">Log Out</a>
 		<!-- Nav tabs -->
 		<ul class="nav nav-tabs" role="tablist">
 		  <li class="nav-item">
@@ -230,7 +230,7 @@ PHP END -->
 		<!-- Tab panes -->
 		<div class="tab-content">
 				<div class="tab-pane" id="userlist" role="tabpanel">
-				
+					<?PHP if($_SESSION['role'] == "DA"){ ?>
 					<!--floating action button-->
 						<div class="btn-group btn-group-lg dropup floating-action-button-custom" id="floatingbutton" valign="bottom">
 						  <button type="button" class="btn btn-info btn-fab" id="round_btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><i class="material-icons">add</i>
@@ -242,6 +242,7 @@ PHP END -->
 						  </ul>
 						</div>  
 					<!-- floating action button END -->
+					<?PHP } ?>
 					
 					<div class="container">
 						<form id='usertable-form' action='' method='post' accept-charset='UTF-8'>
@@ -416,7 +417,7 @@ PHP END -->
 				 </div> 
 			<!-- </div> -->
 			<div class="tab-pane" id="deviceadd" role="tabpanel">
-				
+				<?PHP if($_SESSION['role'] == "DA"){ ?>
 				<!--floating action button-->
 						 <div class="btn-group btn-group-lg dropup floating-action-button-custom" id="floatingbutton" valign="bottom">
 						  <button type="button" class="btn btn-info btn-fab" id="round_btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><i class="material-icons">add</i>
@@ -427,6 +428,7 @@ PHP END -->
 							<li data-toggle="modal" data-target="#delete-deviceModal"><a href="#" class="btn btn-danger btn-fab del_anchor" id="round_btn" data-toggle="tooltip" data-placement="top" title="Delete Machine"><i class="material-icons">clear</i></a></li>
 						  </ul>
 						</div> 
+				<?PHP } ?>
 				
 				<div class="container">
 				<form id='devicetable-form'	action='' method='post' accept-charset='UTF-8'>
@@ -572,6 +574,7 @@ PHP END -->
 					<!-- replace the src to hadoop's web interface. current src is for testing only -->
 					<iframe src="http://192.168.100.140:50070/dfshealth.html#tab-overview">iframes not supported?</iframe>
 				</div>
+				<?PHP if($_SESSION['role'] == "DA"){ ?>
 				<!--floating action button-->
 						 <div class="btn-group btn-group-lg dropup floating-action-button-custom" id="floatingbutton" valign="bottom">
 						  <button type="button" class="btn btn-info btn-fab" id="round_btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><i class="material-icons">add</i>
@@ -581,6 +584,7 @@ PHP END -->
 
 						  </ul>
 						</div> 
+				<?PHP } ?>	
 					
 				<!-- Modal -->
 						<div class="modal fade" id="editFilePermModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
@@ -881,7 +885,7 @@ PHP END -->
 	});
 	</script>  -->
 	<script>
-		$(document).ready(function(){
+		/*$(document).ready(function(){
 		<!-- <td><input type='checkbox' name='checkbox[]' value='gendo'> </td> -->
 		        $(".username-table").append(" <tr><td><input type='checkbox' name='userCheckbox[]' value='gend0'></td><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>"); 
 		        $(".username-table").append(" <tr><td><input type='checkbox' name='userCheckbox[]' value='1'></td><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
@@ -894,15 +898,15 @@ PHP END -->
 		        $(".username-table").append(" <tr><td><input type='checkbox' name='userCheckbox[]' value='8'></td><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
 		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
 		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
-		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
+		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>"); 
 				
 				//$(".duserModal").click(function(){
 				//	alert("The paragraph was clicked.");
 				//}); 
-		});
+		});*/
 	</script>
 	 <script>
-		$(document).ready(function(){
+		/*$(document).ready(function(){
 		        $(".DeviceTable").append(" <tr><td><input type='checkbox' name='MachineCheckbox[]' value='gend0'></td><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>"); 
 		        $(".DeviceTable").append(" <tr><td><input type='checkbox' name='MachineCheckbox[]' value='m1'></td><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
 		        $(".DeviceTable").append(" <tr><td><input type='checkbox' name='MachineCheckbox[]' value='m2'></td><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
@@ -919,7 +923,7 @@ PHP END -->
 				//$(".duserModal").click(function(){
 				//	alert("The paragraph was clicked.");
 				//}); 
-		});
+		});*/
 	</script>
   </body>
 </html>

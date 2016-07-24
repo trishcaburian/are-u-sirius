@@ -56,17 +56,17 @@ if(isset($_SESSION['usersess'])){
 			<input type='hidden' name='submitted' id='submitted' value='1'/>
 
 			<label for='username' >UserName*:</label>
-			<input type='text' name='username' id='username' maxlength="50" />
+			<input type='text' name='username' id='username' maxlength="50" required/>
 
 			<label for='password' >Password*:</label>
-			<input type='password' name='password' id='password' maxlength="50" />
+			<input type='password' name='password' id='password' maxlength="50" required/>
 
 			<input type='submit' name='loginuser' value='Submit' />
 		</fieldset>
 	</form>
 	<script type='text/javascript'>
 	// <![CDATA[
-
+	/*
 		var frmvalidator  = new Validator("login");
 		frmvalidator.EnableOnPageErrorDisplay();
 		frmvalidator.EnableMsgsTogether();
@@ -74,7 +74,7 @@ if(isset($_SESSION['usersess'])){
 		frmvalidator.addValidation("username","req","Please provide your username");
 		
 		frmvalidator.addValidation("password","req","Please provide the password");
-
+	*/
 	// ]]>
 	</script>
 </body>
