@@ -885,7 +885,7 @@ PHP END -->
 	});
 	</script>  -->
 	<script>
-		$(document).ready(function(){
+		/*$(document).ready(function(){
 		<!-- <td><input type='checkbox' name='checkbox[]' value='gendo'> </td> -->
 		        $(".username-table").append(" <tr><td><input type='checkbox' name='userCheckbox[]' value='gend0'></td><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>"); 
 		        $(".username-table").append(" <tr><td><input type='checkbox' name='userCheckbox[]' value='1'></td><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
@@ -898,15 +898,15 @@ PHP END -->
 		        $(".username-table").append(" <tr><td><input type='checkbox' name='userCheckbox[]' value='8'></td><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
 		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
 		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
-		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
+		        $(".username-table").append(" <tr><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>"); 
 				
 				//$(".duserModal").click(function(){
 				//	alert("The paragraph was clicked.");
 				//}); 
-		});
+		});*/
 	</script>
 	 <script>
-		$(document).ready(function(){
+		/*$(document).ready(function(){
 		        $(".DeviceTable").append(" <tr><td><input type='checkbox' name='MachineCheckbox[]' value='gend0'></td><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>"); 
 		        $(".DeviceTable").append(" <tr><td><input type='checkbox' name='MachineCheckbox[]' value='m1'></td><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
 		        $(".DeviceTable").append(" <tr><td><input type='checkbox' name='MachineCheckbox[]' value='m2'></td><th>gendo3</th><td>Gendo Ikari3</td><td>Domain Admin</td><td></td></tr>");
@@ -923,7 +923,7 @@ PHP END -->
 				//$(".duserModal").click(function(){
 				//	alert("The paragraph was clicked.");
 				//}); 
-		});
+		});*/
 	</script>
   </body>
 </html>
