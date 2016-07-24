@@ -80,7 +80,8 @@ else{
 			$userGroup = trim(str_replace('|',"",$getgrpname));
 			
 			echo '<tr>';
-			echo "<td><input type='checkbox' name='userCheckbox[]' value='". $user . "'> </td>";
+			if($_SESSION['role'] == "DA"): 
+				echo "<td><input type='checkbox' name='userCheckbox[]' value='". $user . "'> </td>";
 			echo '<th>'.$user.'</th>';
 			echo '<td>'.$fullName.'</td>';
 			echo '<td>'.$userGroup.'</td>';
@@ -109,7 +110,8 @@ else{
 				break;
 			}
 			echo '<tr>';
-			echo "<td><input type='checkbox' name='MachineCheckbox[]' value='". $machine . "'> </td>";
+			if($_SESSION['role'] == "DA"): 
+				echo "<td><input type='checkbox' name='MachineCheckbox[]' value='". $machine . "'> </td>";
 			echo '<th>'.$machine.'</th>';
 			echo '</tr>';
 		}
@@ -152,7 +154,7 @@ else{
 			$editusercommand=$editusercommand." ".$oldusername;
 			echo $editusercommand;
 	}
-//}
+}
 ?>
 
 PHP END -->
@@ -596,7 +598,7 @@ PHP END -->
 										</button>
 										<h4 class="modal-title" id="myModalLabel1">edit File Permissions</h4>
 									</div>
-									<!-- <!-- <form id='edituserPerm' action='<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>' method='post' accept-charset='UTF-8'> --> 
+									<!-- <form id='edituserPerm' action='<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>' method='post' accept-charset='UTF-8'> --> 
 										<div class="modal-body">
 										
 											<fieldset >
