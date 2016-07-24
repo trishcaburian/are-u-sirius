@@ -2,30 +2,38 @@
 //include("initer.php");
 //session_start();
 if(isset($_SESSION['usersess'])){
-	header("Location: adminpage.php");
+	header("Location: testpage.php");
 }
 //formhandling
 	if($_POST && isset($_POST['loginuser'], $_POST['username'], $_POST['password'])){
 		$username = trim($_POST['username']);
 		$password = trim($_POST['password']);
 	
-                $uspw = $password." ".$username;
-                $pythcommand = "/usr/bin/python /home/siriuser/pythons/thes.py -p"." ".$uspw;
-                $pythlogin = exec($pythcommand);
+        $uspw = $password." ".$username;
+        $pythcommand = "/usr/bin/python /home/siriuser/pythons/thes.py -p"." ".$uspw;
+        $pythlogin = exec($pythcommand);
 		$pythlogin = trim($pythlogin);
 	
 		//echo "<script type='text/javascript'>alert('$pythlogin');</script>";
-                if($pythlogin == "This is a Domain Admin"){
-                        if(!isset($_SESSION)){
-                        	session_start();
-                        	$_SESSION['usersess'] = $username;
-				echo "<script type='text/javascript'>alert('Session!');</script>";
-                	}
-			header("Location: adminpage.php");
+        if($pythlogin == "This is a Domain Admin"){
+            if(!isset($_SESSION)){
+                session_start();
+                $_SESSION['usersess'] = $username;
+				$_SESSION['role'] = "DA";
+				//echo "<script type='text/javascript'>alert('Session!');</script>";
+			}
+			header("Location: testpage.php");
 			//echo "<script type='text/javascript'>alert('$pythlogin');</script>";
-                }
+        }
 		elseif($pythlogin == "This is a Non-Admin"){
-			echo "<script type='text/javascript'>alert('$pythlogin');</script>";
+			if(!isset($_SESSION)){
+                session_start();
+                $_SESSION['usersess'] = $username;
+				$_SESSION['role'] = "U";
+				//echo "<script type='text/javascript'>alert('Session!');</script>";
+			}
+			header("Location: testpage.php");
+			//echo "<script type='text/javascript'>alert('$pythlogin');</script>";
 		}
 		else{
 			echo "<script type='text/javascript'>alert('$pythlogin');</script>";
