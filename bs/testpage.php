@@ -117,13 +117,13 @@ else{*/
 			echo '<tr>';
 			echo "<td><input type='checkbox' name='MachineCheckbox[]' value='". $machine . "'> </td>";
 			echo '<th>'.$machine.'</th>';
-			$fixedDevice= shell_exec("cat /home/siriuser/fixed-devices.txt | grep -x '".$machine."'");
+			$fixedDevice= shell_exec("cat /home/siriuser/fixed-devices.txt | grep -x '".$machine."$'");
 
 			if(!empty($fixedDevice)){
 					echo "<td>Fixed</td>";
 			}
 			else{
-					echo "<td>Mobile/td>";
+					echo "<td>Mobile</td>";
 			}
 			echo '</tr>';
 		}
