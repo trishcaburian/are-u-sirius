@@ -35,7 +35,7 @@ else{*/
 		if(empty($_POST['userCheckbox'])){
 			$machinetodel = $_POST['MachineCheckbox'];
 			foreach($machinetodel as $value){
-				$removefromlist = shell_exec("sed -i '/".$value."\$/d' /home/siriuser/fixed-devices");
+				$removefromlist = shell_exec("sed -i '/".$value."\$/d' /home/siriuser/fixed-devices.txt");
 			}
 			deleteUser($machinetodel);
 		}
@@ -143,7 +143,7 @@ else{*/
 	function deleteUser($array){
 		//$array =array("del1","del2","del3");
 		foreach($array as $value){
-			$delUsercommand ="sudo smbldap-userdel ".$value."$";
+			$delUsercommand ="sudo smbldap-userdel ".$value."\$";
 			$pythnewuserlist = shell_exec($delUsercommand." 2>&1");
 			echo "<script type='text/javascript'>alert('Successfully deleted selected users.')</script>";	
 		}	
