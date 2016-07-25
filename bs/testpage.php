@@ -46,7 +46,7 @@ else{*/
 		$ndexec = shell_exec($ndcomm." 2>&1");
 		//$fixedmobile="";
 		if(isset($_POST['isFixed'])){
-			$addtofixedlist = shell_exec("echo ".$device." >> /home/siriuser 2>&1");
+			$addtofixedlist = shell_exec("echo ".$device." >> /home/siriuser/fixed-devices.txt 2>&1");
 		}
 		
 		echo "<script type='text/javascript'>alert('Successfully added device ".$device."!')</script>";
@@ -117,6 +117,14 @@ else{*/
 			echo '<tr>';
 			echo "<td><input type='checkbox' name='MachineCheckbox[]' value='". $machine . "'> </td>";
 			echo '<th>'.$machine.'</th>';
+			$fixedDevice= shell_exec("cat /home/siriuser/fixed-devices.txt | grep -x '".$machine."'");
+
+			if(!empty($fixedDevice)){
+					echo "<td>Fixed</td>";
+			}
+			else{
+					echo "<td>Mobile/td>";
+			}
 			echo '</tr>';
 		}
 	}
@@ -440,6 +448,7 @@ PHP END -->
 							<tr>
 								<th> </th>
 								<th>Device Name</th>
+								<th>Fixed or Mobile?</th>
 							</tr>
 						</thead>
 						<tbody class="genericTable DeviceTable">
