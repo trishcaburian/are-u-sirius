@@ -32,7 +32,11 @@ else{
 	}
 	else if(isset($_POST['confirmdelete']) or isset($_POST['delete-device'])){ //since a machine is also technically a user, we will use the same command to delete it
 		if(empty($_POST['userCheckbox'])){
-			deleteUser($_POST['MachineCheckbox']);
+			$machinetodel = $_POST['MachineCheckbox'];
+			foreach($machinetodel as $value){
+				$removefromlist = shell_exec("sed -i '/".$value."\$/d' /home/siriuser/fixed-devices.txt");
+			}
+			deleteUser($machinetodel);
 		}
 		else if(empty($_POST['MachineCheckbox'])){
 			deleteUser($_POST['userCheckbox']);
@@ -43,6 +47,11 @@ else{
 		$device = trim($_POST['devicename']);
 		$ndcomm = "sudo smbldap-useradd -w ".$device;
 		$ndexec = shell_exec($ndcomm." 2>&1");
+		
+		if(isset($_POST['isFixed'])){
+			$addtofixedlist = shell_exec("echo ".$device." >> /home/siriuser/fixed-devices.txt 2>&1");
+		}
+		
 		echo "<script type='text/javascript'>alert('Successfully added device ".$device."!')</script>";
 	}
 
@@ -113,6 +122,13 @@ else{
 			if($_SESSION['role'] == "DA"): 
 				echo "<td><input type='checkbox' name='MachineCheckbox[]' value='". $machine . "'> </td>";
 			echo '<th>'.$machine.'</th>';
+			$fixedDevice= shell_exec("cat /home/siriuser/fixed-devices.txt | grep -x '".$machine."$'");
+			if(!empty($fixedDevice)){
+					echo "<td>Fixed</td>";
+			}
+			else{
+					echo "<td>Mobile</td>";
+			}
 			echo '</tr>';
 		}
 	}
@@ -439,6 +455,7 @@ PHP END -->
 							<tr>
 								<th> </th>
 								<th>Device Name</th>
+								<th>Fixed or Mobile?</th>
 							</tr>
 						</thead>
 						<tbody class="genericTable DeviceTable">
@@ -469,6 +486,9 @@ PHP END -->
 											<div class="form-group">
 												<label for='devicename' >Device Name*:</label>
 												<input type='text' class="form-control" name='devicename' id='devicename' maxlength="50" autocomplete="off" required />
+												
+												<label for='isFixed' >Fixed Device?*:</label>
+												<input type='checkbox' name='isFixed' value='Fixed'>
 											</div>
 											
 										</fieldset>
