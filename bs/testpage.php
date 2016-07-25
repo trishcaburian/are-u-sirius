@@ -33,7 +33,11 @@ else{*/
 	}
 	else if(isset($_POST['confirmdelete']) or isset($_POST['delete-device'])){ //since a machine is also technically a user, we will use the same command to delete it
 		if(empty($_POST['userCheckbox'])){
-			deleteUser($_POST['MachineCheckbox']);
+			$machinetodel = $_POST['MachineCheckbox'];
+			foreach($machinetodel as $value){
+				$removefromlist = shell_exec("sed -i '/".$value."\$/d' /home/siriuser/fixed-devices");
+			}
+			deleteUser($machinetodel);
 		}
 		else if(empty($_POST['MachineCheckbox'])){
 			deleteUser($_POST['userCheckbox']);
