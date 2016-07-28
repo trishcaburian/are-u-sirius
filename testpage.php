@@ -34,7 +34,7 @@ else{
 		if(empty($_POST['userCheckbox'])){
 			$machinetodel = $_POST['MachineCheckbox'];
 			foreach($machinetodel as $value){
-				$removefromlist = shell_exec("sed -i '/".$value."\$/d' /home/siriuser/fixed-devices.txt");
+				$removefromlist = shell_exec("sed -i '/".$value."\\$/d' /home/siriuser/fixed-devices.txt");
 			}
 			deleteUser($machinetodel);
 		}
@@ -49,7 +49,7 @@ else{
 		$ndexec = shell_exec($ndcomm." 2>&1");
 		
 		if(isset($_POST['isFixed'])){
-			$addtofixedlist = shell_exec("echo ".$device." >> /home/siriuser/fixed-devices.txt 2>&1");
+			$addtofixedlist = shell_exec("echo '".$device."\$' >> /home/siriuser/fixed-devices.txt 2>&1");
 		}
 		
 		echo "<script type='text/javascript'>alert('Successfully added device ".$device."!')</script>";
